@@ -11,15 +11,10 @@ module.exports = (sequelize) => {
       unique: true
     },
 
-    //Id 
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    }
   },
   {
       timestamps: false,
+      freezeTableName: true,
   }
   );
 };
