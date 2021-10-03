@@ -1,13 +1,26 @@
 import React, {useState, useEffect} from 'react' ;
 import { useDispatch, useSelector } from 'react-redux' ;
-import { getPokemons } from '../../actions';
+import { getPokemons, filterCreated, orderByNameOrStrengh } from '../../actions';
 import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
+import Paginado from '../Paginado';
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function Home(){
 
     const dispatch = useDispatch()
     const allPokemons = useSelector((state) => state.pokemons)
+
+    const [orden, setOrden] = useState('')
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
+    const indexOfLastPokemon = currentPage * pokemonsPerPage;
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+    const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
+
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
 
     useEffect(() => {
         dispatch(getPokemons());
@@ -18,32 +31,54 @@ export default function Home(){
         dispatch(getPokemons());
     }
 
+    function handleFilterCreated(e){
+        dispatch(filterCreated(e.target.value))
+    }
+
+    function handleSort(e){
+        e.preventDefault();
+        dispatch(orderByNameOrStrengh(e.target.value));
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    }
+
     return(
         <div>
+            <SearchBar />
             <Link to="/pokemons">Crear Pokemon</Link>
             <h1>Aguante pokemon ndea</h1>
             <button onClick={e => {handleClick(e)}}>Volver a cargar todos los Pokemones</button>
             <div>
-                <select>
+                <select onChange={e => handleSort(e)}>
                     <option value="asc">A - Z</option>
-                    <option value="des">Z - A</option>
+                    <option value="desc">Z - A</option>
                     <option value="HAttack">+ Attack</option>
-                    <option value="HDefense">+ Defense</option>
+                    <option value="LAttack">- Attack</option>
                 </select>
-                <select>
+                <select onChange={e => handleFilterCreated(e)}>
                     <option value="All">All</option>
                     <option value="Api">API</option>
                     <option value="Created">Created</option>
                 </select>
+                <select>
+                    {
+
+                    }
+                </select>
             </div>
+            <Paginado
+                pokemonsPerPage={pokemonsPerPage}
+                allPokemons = {allPokemons.length}
+                paginado={paginado}
+            />
             {
-                allPokemons && allPokemons.map( el => {
+                currentPokemons && currentPokemons.map( el => {
                     return(
-                        <fragment>
+                        <div>
                             <Link to={"/home/" + el.id}>
-                                <Card name={el.name} types={el.type} image={el.img} />
+                                <Card name={el.name} types={el.type} image={el.img} key={el.id} />
                             </Link>
-                        </fragment>
+                        </div>
                     )
                 })
             }
