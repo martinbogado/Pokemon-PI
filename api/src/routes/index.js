@@ -36,8 +36,7 @@ const getApiInfo = async () => {
         id: pokeInfo.id,
         name: pokeInfo.name,
         type: pokeInfo.types.map((t) => t.type.name),
-        img: pokeInfo.sprites.versions["generation-v"]["black-white"].animated
-          .front_default,
+        img: pokeInfo.sprites.other['official-artwork'].front_default,
         strengh: pokeInfo.stats[1].base_stat,
       });
     }
@@ -64,7 +63,7 @@ router.get('/pokemons', async (req, res) => {
     let pokemonsTotal = await getApiInfo()
 
     if(name){
-       let pokemonName = await pokemonsTotal.filter( el => el.name.toLowerCase().includes(name.toLowerCase()))
+       let pokemonName = pokemonsTotal.filter( el => el.name.toLowerCase().includes(name.toLowerCase()))
 
        pokemonName.length ? 
        res.status(200).send(pokemonName) :
