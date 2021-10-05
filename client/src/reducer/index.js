@@ -2,7 +2,8 @@
 const initialState = {
     pokemons : [],
     allPokemons: [],
-    types: []
+    types: [],
+    detail: []
 }
 
 function rootReducer (state = initialState, action){
@@ -30,6 +31,12 @@ function rootReducer (state = initialState, action){
                 ...state,
                 pokemons: action.payload
             }    
+
+        case "GET_DETAILS":
+            return {
+                ...state,
+                detail: action.payload
+            }  
 
         case "FILTER_BY_TYPES":
             const allPokemons = state.allPokemons

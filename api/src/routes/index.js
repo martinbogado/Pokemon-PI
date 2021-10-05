@@ -73,6 +73,21 @@ const getAllPokemons = async () => {
     return infoTotal;
 }
 
+const getPokeInfo = async (id) => {
+  const apiPokeUrl = await axios.get("https://pokeapi.co/api/v2/pokemon/" + id);
+  const results = apiPokeUrl.data
+  
+  const pokemonInfo = {
+    id: results.id,
+    name: results.name,
+    types: results.types.map((t) => t.type.name),
+    img: results.sprites.other['official-artwork'].front_default,
+    strengh: results.stats[1].base_stat,
+  }
+
+  return pokemonInfo;
+}
+
 
 router.get('/pokemons', async (req, res) => {
     const name = req.query.name
@@ -139,10 +154,21 @@ router.post('/pokemons', async (req, res) => {
 
 router.get('/pokemons/:idPokemon', async (req, res) => {
   const { idPokemon } = req.params
-  const pokemonsTotal = await getAllPokemons()
-
   
-  if(idPokemon){
+  let pokemonInfo;
+  if(idPokemon >= 1 && idPokemon <= 40 ){
+    pokemonInfo = await getPokeInfo(idPokemon)
+    const pokemonID = []
+    pokemonID.push(pokemonInfo)
+    
+    pokemonID.length ?
+    res.status(200).send(pokemonID) :
+    res.status(404).send('Pokemon not found')
+  }
+
+  const pokemonsTotal = await getDbInfo()
+
+  if(!pokemonInfo && idPokemon){
     const pokemonId = pokemonsTotal.filter( el => el.id == idPokemon )
     console.log(pokemonId)
 

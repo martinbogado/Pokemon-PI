@@ -75,7 +75,7 @@ export default function Home(){
                     <option value="All">all</option>
                     {
                         types.map( type => (
-                            <option value={type.name}>{type.name}</option>
+                            <option value={type.name} key={type.name}>{type.name}</option>
                         ))
                     }
                 </select>
