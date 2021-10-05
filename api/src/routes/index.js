@@ -2,7 +2,7 @@ const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const axios = require('axios')
-const { Pokemon, Type } = require('../db.js')
+const { Pokemon, Type } = require('../db.js');
 
 const router = Router();
 
@@ -35,7 +35,7 @@ const getApiInfo = async () => {
       pokemonInfo.push({
         id: pokeInfo.id,
         name: pokeInfo.name,
-        type: pokeInfo.types.map((t) => t.type.name),
+        types: pokeInfo.types.map((t) => t.type.name),
         img: pokeInfo.sprites.other['official-artwork'].front_default,
         strengh: pokeInfo.stats[1].base_stat,
       });
@@ -45,14 +45,30 @@ const getApiInfo = async () => {
 }
 
 const getDbInfo = async () => {
-	return await Pokemon.findAll({ include: [Type] });
+	const data = (await Pokemon.findAll({ 
+    include: {
+      model: Type,
+      attributes: ['name'],
+      through: {
+        attributes: [],
+      }
+    }
+  })).map(pokemon => {
+    const json = pokemon.toJSON();
+    return{
+      ...json,
+      types: json.types.map( type => type.name)
+    }
+  });
+  console.log(data)
+  return data
 }
 
-
 const getAllPokemons = async () => {
-    const apiInfo = getApiInfo();
-    const dbInfo = getDbInfo();
+    const apiInfo = await getApiInfo();
+    const dbInfo = await getDbInfo();
     const infoTotal = [...apiInfo, ...dbInfo]; 
+    console.log(infoTotal)
 
     return infoTotal;
 }
@@ -60,7 +76,7 @@ const getAllPokemons = async () => {
 
 router.get('/pokemons', async (req, res) => {
     const name = req.query.name
-    let pokemonsTotal = await getApiInfo()
+    let pokemonsTotal = await getAllPokemons()
 
     if(name){
        let pokemonName = pokemonsTotal.filter( el => el.name.toLowerCase().includes(name.toLowerCase()))
@@ -97,7 +113,7 @@ router.post('/pokemons', async (req, res) => {
 		speed, 
 		height, 
 		weight, 
-		sprite,
+		img,
     createdInDb 
 	} = req.body;
 
@@ -109,7 +125,7 @@ router.post('/pokemons', async (req, res) => {
     speed, 
     height, 
     weight, 
-    sprite,
+    img,
     createdInDb 
   })
 
@@ -123,7 +139,7 @@ router.post('/pokemons', async (req, res) => {
 
 router.get('/pokemons/:idPokemon', async (req, res) => {
   const { idPokemon } = req.params
-  const pokemonsTotal = await getApiInfo()
+  const pokemonsTotal = await getAllPokemons()
 
   
   if(idPokemon){

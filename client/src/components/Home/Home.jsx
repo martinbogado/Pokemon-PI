@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from 'react' ;
 import { useDispatch, useSelector } from 'react-redux' ;
-import { getPokemons, filterCreated, orderByNameOrStrengh } from '../../actions';
+import { getPokemons, filterCreated, orderByNameOrStrengh, getTypes, filterPokemonsByType } from '../../actions';
 import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 import Paginado from '../Paginado';
 import SearchBar from '../SearchBar/SearchBar';
+import random from '../../images/random.png'
+
 
 export default function Home(){
 
     const dispatch = useDispatch()
     const allPokemons = useSelector((state) => state.pokemons)
+    const types = useSelector(state => state.types)
 
     const [orden, setOrden] = useState('')
     const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +29,10 @@ export default function Home(){
         dispatch(getPokemons());
     }, [dispatch])
 
+    useEffect(() => {
+        dispatch(getTypes());
+    }, [dispatch]);
+
     function handleClick(e){
         e.preventDefault();
         dispatch(getPokemons());
@@ -33,6 +40,10 @@ export default function Home(){
 
     function handleFilterCreated(e){
         dispatch(filterCreated(e.target.value))
+    }
+
+    function handleFilterByType(e){
+        dispatch(filterPokemonsByType(e.target.value))
     }
 
     function handleSort(e){
@@ -60,9 +71,12 @@ export default function Home(){
                     <option value="Api">API</option>
                     <option value="Created">Created</option>
                 </select>
-                <select>
+                <select onChange={e => handleFilterByType(e)}>
+                    <option value="All">all</option>
                     {
-
+                        types.map( type => (
+                            <option value={type.name}>{type.name}</option>
+                        ))
                     }
                 </select>
             </div>
@@ -76,7 +90,7 @@ export default function Home(){
                     return(
                         <div>
                             <Link to={"/home/" + el.id}>
-                                <Card name={el.name} types={el.type} image={el.img} key={el.id} />
+                                <Card name={el.name} types={el.types} image={el.img ? el.img : random} key={el.id} />
                             </Link>
                         </div>
                     )

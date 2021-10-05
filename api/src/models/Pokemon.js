@@ -55,13 +55,6 @@ module.exports = (sequelize) => {
       defaultValue: '100'
     },
 
-    //Imagen del Pokemon
-    sprite: {
-      type: DataTypes.TEXT,
-      validate: { isUrl: true },
-      defaultValue: 'https://w7.pngwing.com/pngs/248/960/png-transparent-pikachu-pokemon-go-silhouette-drawing-pikachu-dog-like-mammal-fictional-character-black-thumbnail.png'      
-    },
-
     createdInDb: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
