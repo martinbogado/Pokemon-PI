@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux' ;
 import { getPokemons, filterCreated, orderByNameOrStrengh, getTypes, filterPokemonsByType } from '../../actions';
 import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
-import Paginado from '../Paginado';
+import Paginado from '../Paginado/Paginado';
 import SearchBar from '../SearchBar/SearchBar';
 import random from '../../images/random.png'
+import style from './Home.module.css'
 
 
 export default function Home(){
@@ -85,8 +86,9 @@ export default function Home(){
                 allPokemons = {allPokemons.length}
                 paginado={paginado}
             />
+            <div className={style.cards}>
             {
-                currentPokemons && currentPokemons.map( el => {
+                currentPokemons.length ? currentPokemons.map( el => {
                     return(
                         <div>
                             <Link to={"/home/" + el.id}>
@@ -94,8 +96,13 @@ export default function Home(){
                             </Link>
                         </div>
                     )
-                })
+                }) :
+                <div className={style.loading}> 
+                    <img src='images/loading.gif'alt="Loading.." width='250px'/>
+                    <p>Loading...</p>
+                </div>
             }
+            </div>
         </div>
     )
 }

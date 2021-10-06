@@ -1,0 +1,15 @@
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 14em;
+    max-width: 20em;
+    border-radius: 0.75em;
+    box-shadow: 0 3px 3px #0001;
+    overflow: hidden;
+  }
+
+.img {
+    display:block;
+    margin:auto;
+}  
