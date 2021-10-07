@@ -37,7 +37,7 @@ const getApiInfo = async () => {
         name: pokeInfo.name,
         types: pokeInfo.types.map((t) => t.type.name),
         img: pokeInfo.sprites.other['official-artwork'].front_default,
-        strengh: pokeInfo.stats[1].base_stat,
+        attack: pokeInfo.stats[1].base_stat,
       });
     }
     
@@ -82,7 +82,12 @@ const getPokeInfo = async (id) => {
     name: results.name,
     types: results.types.map((t) => t.type.name),
     img: results.sprites.other['official-artwork'].front_default,
-    strengh: results.stats[1].base_stat,
+    hp: results.stats[0].base_stat,
+    attack: results.stats[1].base_stat,
+    defense: results.stats[2].base_stat,
+    speed: results.stats[5].base_stat,
+    weight: results.weight,
+    height: results.height
   }
 
   return pokemonInfo;
@@ -105,8 +110,8 @@ router.get('/pokemons', async (req, res) => {
 })
 
 router.get('/types', async (req, res) => {
-  const typesApi = await axios.get("https://pokeapi.co/api/v2/type")
-  const types = typesApi.data.results
+  const typesApi = await axios.get("https://pokeapi.co/api/v2/type");
+  const types = typesApi.data.results;
 
   types.forEach( el => {
     Type.findOrCreate({
@@ -115,7 +120,7 @@ router.get('/types', async (req, res) => {
   })
 
   const allTypes = await Type.findAll();
-  res.send(allTypes)
+  res.send(allTypes);
 })
 
 router.post('/pokemons', async (req, res) => {
@@ -170,7 +175,6 @@ router.get('/pokemons/:idPokemon', async (req, res) => {
 
   if(!pokemonInfo && idPokemon){
     const pokemonId = pokemonsTotal.filter( el => el.id == idPokemon )
-    console.log(pokemonId)
 
     pokemonId.length ?
     res.status(200).send(pokemonId) :

@@ -10,7 +10,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <h1>Henry Pokemon</h1>
         <Switch>
           <Route exact path="/" component={LandingPage}/>
           <Route exact path="/home" component={Home}/>

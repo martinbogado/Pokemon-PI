@@ -1,14 +1,22 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postPokemon, getTypes } from '../../actions/index';
+import style from './PokemonCreate.module.css'
 
-function validate(input){
+function validate(input, pokemons){
     let errors = {};
 
     if(!input.name){
         errors.name = 'Se requiere un nombre'
     }
+    if(pokemons.indexOf( input.name ) !== -1){
+        errors.name = 'Ya existe un pokemon con ese nombre'
+    }
+    if(input.name.length > 25){
+        errors.name = 'El nombre no puede tener mas de 25 caracteres'
+    }
+
     if(input.hp < 1 || input.hp > 200){
         errors.hp = 'La vida del Pokemon debe ser menor a 200'
     }
@@ -27,20 +35,21 @@ function validate(input){
     if(input.height < 1 || input.height > 200){
         errors.height = 'La altura del Pokemon debe ser menor a 200'
     }
+
     if(!input.types.length){
         errors.types = 'Debe elegir alguna clase'
     }
     if(input.types.length > 3){
         errors.types = 'No puede elegir mas de 3 tipos por Pokemon'
     }
-    console.log(errors)
-
+    
     return errors;
 }
 
 export default function PokemonCreate(){
     const dispatch = useDispatch();
     const types = useSelector(state => state.types)
+    const pokemons = useSelector(state => state.allPokemons.map( pok => pok.name))
     const history = useHistory()
 
     const [errors, setErrors] = useState({})
@@ -56,6 +65,7 @@ export default function PokemonCreate(){
         types: [],
     })
 
+
     useEffect(() => {
         dispatch(getTypes());
     }, [dispatch]);
@@ -69,7 +79,7 @@ export default function PokemonCreate(){
         setErrors(validate({
             ...input,
             [e.target.name] : e.target.value
-        }))
+        }, pokemons))
     }
 
     function handleSelect(e){
@@ -81,13 +91,13 @@ export default function PokemonCreate(){
         setErrors(validate({
             ...input,
             types: [...input.types , e.target.value]
-        }))
+        }, pokemons))
     }
 
     function handleSubmit(e){
         e.preventDefault();
 
-        if(Object.keys(errors).length === 0){
+        if(Object.keys(errors).length === 0 && input.name.length){
             dispatch(postPokemon(input))
             alert("Pokemon created successfuly!!")
             setInput({
@@ -104,126 +114,188 @@ export default function PokemonCreate(){
         }   
     }
 
+
     return(
         <div>
-            <Link to='/home'><button>Go back</button></Link>
-            <h1>Create your pokemon!</h1>
-            <form onSubmit={ (e) => handleSubmit(e) }>
-                <div>
-                    <label>Name:</label>
-                    <input 
-                        type="text"
-                        value={input.name}
-                        name="name"
-                        onChange={ (e) => handleChange(e) }
-                    />
-                    {
-                        errors.name && (
-                            <p>{errors.name}</p>
-                        )
-                    }
+            <Link to='/home'><button className={style.back}>Go back</button></Link>
+            <div className={style.container}>
+                <div className={style.header}>
+                    <h2>Create your pokemon!</h2>
                 </div>
-                <div>
-                    <label>Hp:</label>
-                    <input 
-                        type="number"
-                        value={input.hp}
-                        name="hp"
-                        onChange={ (e) => handleChange(e) }
-                    />
-                    {
-                        errors.hp && (
-                            <p>{errors.hp}</p>
-                        )
-                    }
-                </div>
-                <div>
-                    <label>Attack:</label>
-                    <input 
-                        type="number"
-                        value={input.attack}
-                        name="attack"
-                        onChange={ (e) => handleChange(e) }
-                    />
-                    {
-                        errors.attack && (
-                            <p>{errors.attack}</p>
-                        )
-                    }
-                </div>
-                <div>
-                    <label>Defense:</label>
-                    <input 
-                        type="number"
-                        value={input.defense}
-                        name="defense"
-                        onChange={ (e) => handleChange(e) }
-                    />
-                    {
-                        errors.defense && (
-                            <p>{errors.defense}</p>
-                        )
-                    }
-                </div>
-                <div>
-                    <label>Speed:</label>
-                    <input 
-                        type="number"
-                        value={input.speed}
-                        name="speed"
-                        onChange={ (e) => handleChange(e) }
-                    />
-                    {
-                        errors.speed && (
-                            <p>{errors.speed}</p>
-                        )
-                    }
-                </div>
-                <div>
-                    <label>Weight:</label>
-                    <input 
-                        type="number"
-                        value={input.weight}
-                        name="weight"
-                        onChange={ (e) => handleChange(e) }
-                    />
-                    {
-                        errors.weight && (
-                            <p>{errors.weight}</p>
-                        )
-                    }
-                </div>
-                <div>
-                    <label>Height:</label>
-                    <input 
-                        type="number"
-                        value={input.height}
-                        name="height"
-                        onChange={ (e) => handleChange(e) }
-                    />
-                    {
-                        errors.height && (
-                            <p>{errors.height}</p>
-                        )
-                    }
-                </div>
-                <select onChange={(e) => handleSelect(e)}>
-                    {
-                        types.map( type => (
-                            <option value={type.name}>{type.name}</option>
-                        ))
-                    }
-                </select>
-                <ul><li>{input.types.map( el => el + " ,")}</li></ul>
-                    {
-                        errors.types && (
-                            <p>{errors.types}</p>
-                        )
-                    }
+                <form onSubmit={ (e) => handleSubmit(e) }>
+                    <div className={style.formdiv} >
+                        <label>Name</label>
+                        <input 
+                            type="text"
+                            value={input.name}
+                            name="name"
+                            onChange={ (e) => handleChange(e) }
+                            style={input.name.length ? errors.name ? {borderColor: '#e74c3c' } : {borderColor: '#2ecc71'} : {}}
+                        />
+                        {
+                            errors.name ? (
+                                <div>
+                                <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
+                                <p>{errors.name}</p>
+                                </div>
+                            ) :
+                            input.name.length ?
+                            <i className="fas fa-check-circle" style={{color: '#2ecc71'}}></i>
+                            :
+                            <i></i>
+                        }
+                    </div>
+                    <div className={style.formdiv}>
+                        <label>Hp</label>
+                        <input 
+                            type="number"
+                            value={input.hp}
+                            name="hp"
+                            onChange={ (e) => handleChange(e) }
+                            style={input.hp.length ? errors.hp ? {borderColor: '#e74c3c' } : {borderColor: '#2ecc71'} : {}}
+                        />
+                        {
+                            errors.hp ? (
+                                <div>
+                                <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
+                                <p>{errors.hp}</p>
+                                </div>
+                            ) :
+                            input.hp.length ?
+                            <i className="fas fa-check-circle" style={{color: '#2ecc71'}}></i>
+                            :
+                            <i></i>
+                        }
+                    </div>
+                    <div className={style.formdiv}>
+                        <label>Attack</label>
+                        <input 
+                            type="number"
+                            value={input.attack}
+                            name="attack"
+                            onChange={ (e) => handleChange(e) }
+                            style={input.attack.length ? errors.attack ? {borderColor: '#e74c3c' } : {borderColor: '#2ecc71'} : {}}
+                        />
+                        {
+                            errors.attack ? (
+                                <div>
+                                <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
+                                <p>{errors.attack}</p>
+                                </div>
+                            ) :
+                            input.attack.length ?
+                            <i className="fas fa-check-circle" style={{color: '#2ecc71'}}></i>
+                            :
+                            <i></i>
+                        }
+                    </div>
+                    <div className={style.formdiv}>
+                        <label>Defense</label>
+                        <input 
+                            type="number"
+                            value={input.defense}
+                            name="defense"
+                            onChange={ (e) => handleChange(e) }
+                            style={input.defense.length ? errors.defense ? {borderColor: '#e74c3c' } : {borderColor: '#2ecc71'} : {}}
+                        />
+                        {
+                             errors.defense ? (
+                                <div>
+                                <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
+                                <p>{errors.defense}</p>
+                                </div>
+                            ) :
+                            input.defense.length ?
+                            <i className="fas fa-check-circle" style={{color: '#2ecc71'}}></i>
+                            :
+                            <i></i>
+                        }
+                    </div>
+                    <div className={style.formdiv}>
+                        <label>Speed</label>
+                        <input 
+                            type="number"
+                            value={input.speed}
+                            name="speed"
+                            onChange={ (e) => handleChange(e) }
+                            style={input.speed.length ? errors.speed ? {borderColor: '#e74c3c' } : {borderColor: '#2ecc71'} : {}}
+                        />
+                        {
+                             errors.speed ? (
+                                <div>
+                                <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
+                                <p>{errors.speed}</p>
+                                </div>
+                            ) :
+                            input.speed.length ?
+                            <i className="fas fa-check-circle" style={{color: '#2ecc71'}}></i>
+                            :
+                            <i></i>
+                        }
+                    </div>
+                    <div className={style.formdiv}>
+                        <label>Weight</label>
+                        <input 
+                            type="number"
+                            value={input.weight}
+                            name="weight"
+                            onChange={ (e) => handleChange(e) }
+                            style={input.weight.length ? errors.weight ? {borderColor: '#e74c3c' } : {borderColor: '#2ecc71'} : {}}
+                        />
+                        {
+                             errors.weight ? (
+                                <div>
+                                <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
+                                <p>{errors.weight}</p>
+                                </div>
+                            ) :
+                            input.weight.length ?
+                            <i className="fas fa-check-circle" style={{color: '#2ecc71'}}></i>
+                            :
+                            <i></i>
+                        }
+                    </div>
+                    <div className={style.formdiv}>
+                        <label>Height</label>
+                        <input 
+                            type="number"
+                            value={input.height}
+                            name="height"
+                            onChange={ (e) => handleChange(e) }
+                            style={input.height.length ? errors.height ? {borderColor: '#e74c3c' } : {borderColor: '#2ecc71'} : {}}
+                        />
+                        {
+                            errors.height ? (
+                                <div>
+                                <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
+                                <p>{errors.height}</p>
+                                </div>
+                            ) :
+                            input.height.length ?
+                            <i className="fas fa-check-circle" style={{color: '#2ecc71'}}></i>
+                            :
+                            <i></i>
+                        }
+                    </div>
+                    <select onChange={(e) => handleSelect(e)}>
+                        {
+                            types.map( type => (
+                                <option value={type.name}>{type.name}</option>
+                            ))
+                        }
+                    </select>
+                    <ul><li style={{listStyle: 'none'}}>{input.types.map( el => el + " ,")}</li></ul>
+                        {
+                            errors.types && (
+                                <p style={{color: '#e74c3c'}}>{errors.types}</p>
+                            )
+                        }
 
-                <button type='submit'>Create</button>
+                    <button type='submit'>Create</button>
 
-            </form>
+                </form>
+            </div>
+
         </div>
     )
 }

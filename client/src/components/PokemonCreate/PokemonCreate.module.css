@@ -1,0 +1,88 @@
+
+
+.container{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: 0 2px 5% rgba(0, 0, 0, 0.3);
+    width: 35rem;
+    max-width: 50%;
+    font-family: 'Open Sans', sans-serif;
+    overflow: hidden;
+    position: absolute;
+    right: 10%;
+}
+
+.header{
+    background-color: #f7f7f7;
+    padding: 20px 40px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.header h2{
+    margin: 0;
+}
+
+.formdiv{
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.formdiv label{
+    display: flex;
+    margin-left: 5%;
+    margin-bottom: 5px;
+}
+
+.formdiv input{
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 50%;
+    padding: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    margin-left: 2vw;
+}
+
+
+.formdiv i {
+    position: absolute;
+    top: 40px;
+    left: 54%
+}
+
+.formdiv p {
+    position: absolute;
+    top: 60%;
+    left: 5%;
+    font-size: 14px;
+    color: #e74c3c;
+}
+
+.container button{
+    background-color: rgb(23, 226, 241);
+    border: 2px solid rgb(1, 216, 231);
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 10px;
+    width: 50%;
+    cursor: pointer;
+    margin-left: 7%;
+}
+
+/* Arrows from input number*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

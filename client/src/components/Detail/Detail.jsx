@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetail } from '../../actions';
 import random from '../../images/random.png'
+import loading from '../../images/loading.gif'
 
 export default function Detail (props){
     
@@ -25,7 +26,10 @@ export default function Detail (props){
                    <img src={myPokemon[0].img ? myPokemon[0].img : random}/>
                    <h4>Types: {myPokemon[0].types + ' '}</h4>
                 </div> :
-                <div>Loading.. </div> 
+                <div> 
+                    <img src={loading}alt="Loading.." width='250px'/>
+                    <p>Loading...</p>
+                </div> 
             }
         </div>
     )

@@ -1,0 +1,10 @@
+
+.position{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.boton{
+    cursor: pointer;
+}

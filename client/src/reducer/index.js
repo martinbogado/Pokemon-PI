@@ -84,10 +84,10 @@ function rootReducer (state = initialState, action){
             }
             if(action.payload === 'HAttack'){
                 sortedArray = state.pokemons.sort(function (a, b){
-                        if(a.strengh > b.strengh){
+                        if(a.attack > b.attack){
                             return -1;
                         }
-                        if(b.strengh > a.strengh){
+                        if(b.attack > a.attack){
                             return 1;
                         }
                         return 0;
@@ -95,10 +95,10 @@ function rootReducer (state = initialState, action){
             }
             if(action.payload === 'LAttack'){
                 sortedArray = state.pokemons.sort(function (a, b){
-                        if(a.strengh > b.strengh){
+                        if(a.attack > b.attack){
                             return 1;
                         }
-                        if(b.strengh > a.strengh){
+                        if(b.attack > a.attack){
                             return -1;
                         }
                         return 0;

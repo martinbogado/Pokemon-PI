@@ -92,7 +92,7 @@ export default function Home(){
                     return(
                         <div>
                             <Link to={"/home/" + el.id}>
-                                <Card name={el.name} types={el.types} image={el.img ? el.img : random} key={el.id} />
+                                <Card name={el.name} types={el.types} image={el.img ? el.img : random} id={el.id} key={el.id} />
                             </Link>
                         </div>
                     )

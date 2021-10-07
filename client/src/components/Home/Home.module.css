@@ -2,9 +2,8 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: auto; 
-    grid-gap: 1rem;
-    }
-
+    grid-gap: 1rem;   
+}
 
 
 /* Loading  */
@@ -14,5 +13,4 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    background-color: tomato;
 }
