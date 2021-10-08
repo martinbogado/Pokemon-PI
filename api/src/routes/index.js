@@ -68,7 +68,7 @@ const getAllPokemons = async () => {
     const apiInfo = await getApiInfo();
     const dbInfo = await getDbInfo();
     const infoTotal = [...apiInfo, ...dbInfo]; 
-    console.log(infoTotal)
+    // console.log(infoTotal)
 
     return infoTotal;
 }
@@ -89,6 +89,7 @@ const getPokeInfo = async (id) => {
     weight: results.weight,
     height: results.height
   }
+  console.log(pokemonInfo)
 
   return pokemonInfo;
 }

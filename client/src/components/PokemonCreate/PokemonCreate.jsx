@@ -17,23 +17,23 @@ function validate(input, pokemons){
         errors.name = 'El nombre no puede tener mas de 25 caracteres'
     }
 
-    if(input.hp < 1 || input.hp > 200){
-        errors.hp = 'La vida del Pokemon debe ser menor a 200'
+    if(input.hp < 1 || input.hp > 150){
+        errors.hp = 'La vida del Pokemon debe ser menor a 150'
     }
-    if(input.attack < 1 || input.attack > 200){
-        errors.attack = 'El poder de ataque del Pokemon debe ser menor a 200'
+    if(input.attack < 1 || input.attack > 120){
+        errors.attack = 'El poder de ataque del Pokemon debe ser menor a 120'
     }
-    if(input.defense < 1 || input.defense > 200){
-        errors.defense = 'La defensa del Pokemon debe ser menor a 200'
+    if(input.defense < 1 || input.defense > 120){
+        errors.defense = 'La defensa del Pokemon debe ser menor a 120'
     }
-    if(input.speed < 1 || input.speed > 200){
-        errors.speed = 'La velocidad del Pokemon debe ser menor a 200'
+    if(input.speed < 1 || input.speed > 100){
+        errors.speed = 'La velocidad del Pokemon debe ser menor a 100'
     }
-    if(input.weight < 1 || input.weight > 200){
-        errors.weight = 'El peso del Pokemon debe ser menor a 200'
+    if(input.weight < 1 || input.weight > 1500){
+        errors.weight = 'El peso del Pokemon debe ser menor a 1500g'
     }
-    if(input.height < 1 || input.height > 200){
-        errors.height = 'La altura del Pokemon debe ser menor a 200'
+    if(input.height < 1 || input.height > 100){
+        errors.height = 'La altura del Pokemon debe ser menor a 100'
     }
 
     if(!input.types.length){
