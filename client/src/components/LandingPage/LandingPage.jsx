@@ -1,8 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom"
-import style from './LandingPage.module.css'
+import React, { useEffect } from 'react';
+import { getPokemons, getTypes } from '../../actions';
+import { useDispatch } from 'react-redux' ;
+import { Link } from "react-router-dom";
+import style from './LandingPage.module.css';
+
 
 export default function LandingPage(){
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getPokemons());
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(getTypes());
+    }, [dispatch]);
+
     return(
         <div className={style.position}>
             <div style={{display:'flex', flexFlow:'column'}}>

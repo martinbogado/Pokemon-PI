@@ -29,23 +29,30 @@ export function getTypes(){
 export function postPokemon(payload){
     return async function(dispatch){
         const pokemon = await axios.post("http://localhost:3001/pokemons", payload)
-        console.log(pokemon)
+        
         return pokemon
     }
 }
 
-export function getPokemonName(name){
-    return async function (dispatch){
-        try{
-            const json = await axios.get("http://localhost:3001/pokemons?name=" + name)
+// export function getPokemonName(name){
+//     return async function (dispatch){
+//         try{
+//             const json = await axios.get("http://localhost:3001/pokemons?name=" + name)
+           
+//             return dispatch({
+//                 type:"GET_POKEMON_NAME",
+//                 payload: name,
+//             })
+//         } catch(error){
+//             console.log(error)
+//         }
+//     }
+// }
 
-            return dispatch({
-                type:"GET_POKEMON_NAME",
-                payload: json.data
-            })
-        } catch(error){
-            console.log(error)
-        }
+export function getPokemonName(payload){
+    return {
+        type:"GET_POKEMON_NAME",
+        payload
     }
 }
 
