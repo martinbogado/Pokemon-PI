@@ -109,9 +109,9 @@ __IMPORTANTE__: Dentro de la Ruta Principal se deben mostrar tanto los pokemons 
 
 __Ruta de detalle de Pokemon__: debe contener
 - [X] Los campos mostrados en la ruta principal para cada pokemon (imagen, nombre y tipos)
-- [ ] Número de Pokemon (id)
-- [ ] Estadísticas (vida, fuerza, defensa, velocidad)
-- [ ] Altura y peso
+- [X] Número de Pokemon (id)
+- [X] Estadísticas (vida, fuerza, defensa, velocidad)
+- [X] Altura y peso
 
 __Ruta de creación__: debe contener
 - [X] Un formulario __controlado__ con los campos mencionados en el detalle del pokemon
@@ -165,5 +165,5 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
 
 #### Testing
 - [ ] Al menos tener un componente del frontend con sus tests respectivos
-- [ ] Al menos tener una ruta del backend con sus tests respectivos
-- [ ] Al menos tener un modelo de la base de datos con sus tests respectivos
+- [X] Al menos tener una ruta del backend con sus tests respectivos
+- [X] Al menos tener un modelo de la base de datos con sus tests respectivos

@@ -60,7 +60,7 @@ const getDbInfo = async () => {
       types: json.types.map( type => type.name)
     }
   });
-  console.log(data)
+  
   return data
 }
 
