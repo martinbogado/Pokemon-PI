@@ -3,8 +3,37 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    height: 100vh;
+    /* background: #E4ECFA; */
+    background: linear-gradient(90deg, rgba(255,160,26,1) 8%, rgba(255,196,42,1) 32%, rgba(255,222,95,1) 62%, rgba(255,252,133,1) 88%);
 }
 
+/* Button Style */
 .boton{
     cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    border: none;
+
+    padding: 16px 32px;
+    color: #fff;
+    font-family: 'Roboto', Arial;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    line-height: 1;
+    border-radius: 24px;
+
+    background-image: linear-gradient(45deg, #f5642a 0%, #ee8f14 55%, #f56e20 90%);
+    background-position: 90% 0;
+    background-size: 200% 200%;
+    box-shadow: 0 2px 8px -1px #3f3709;
+
+    transition: all 0.5s ease;
+}
+
+.boton:hover {
+    box-shadow: 0 0px 0px 0 rgba(0, 40, 120, 0);
+    background-position: 0 0;
+    transform: translateY(-5px);
 }
