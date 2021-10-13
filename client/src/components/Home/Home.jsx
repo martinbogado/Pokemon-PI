@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
 import SearchBar from '../SearchBar/SearchBar';
+import Navbar from '../Navbar/Navbar';
 import random from '../../images/random.png'
 import style from './Home.module.css'
 
@@ -55,11 +56,11 @@ export default function Home(){
     }
 
     return(
-        <div>
-            <SearchBar />
-            <Link to="/pokemons">Crear Pokemon</Link>
-            <h1>Aguante pokemon ndea</h1>
+        <div className={style.home}>
+            <Navbar />
+            
             <button onClick={e => {handleClick(e)}}>Volver a cargar todos los Pokemones</button>
+
             <div>
                 <select onChange={e => handleSort(e)}>
                     <option value="asc">A - Z</option>

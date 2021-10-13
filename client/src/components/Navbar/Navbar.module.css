@@ -1,0 +1,41 @@
+.nav{
+    height: 10vh;
+    background-color: #1C1D23;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+
+/* Button Style */
+.create{
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    border: none;
+
+    padding: 16px 32px;
+    color: #fff;
+    font-family: 'Roboto', Arial;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    line-height: 1;
+    border-radius: 8px;
+
+    background-image: linear-gradient(45deg, #2378c9 10%, #133079 90%);
+    background-position: 90% 0;
+    background-size: 200% 200%;
+    box-shadow: 0 2px 8px -1px #09113f;
+
+    transition: all 0.5s ease;
+}
+
+.create:hover {
+    box-shadow: 0 0px 0px 0 rgba(0, 40, 120, 0);
+    background-position: 0 0;
+}
+
