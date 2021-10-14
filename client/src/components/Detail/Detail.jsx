@@ -94,10 +94,10 @@ export default function Detail (props){
                    </div>
     
                 </div> :
-                <div> 
-                    <img src={loading}alt="Loading.." width='250px'/>
-                    <p>Loading...</p>
-                </div> 
+                <div className={style.loading}> 
+                    <img src={loading} alt="Loading.." width='250px'/>
+                    <p className={style.loadingtext}>Loading...</p>
+                </div>
             }
         </div>
         

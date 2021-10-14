@@ -3,7 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postPokemon, getTypes } from '../../actions/index';
 import style from './PokemonCreate.module.css'
+import Checkbox from '../Checkbox/Checkbox';
 import validate from './validate.js';
+import Oak from '../../images/profesor.png'
 
 
 export default function PokemonCreate(){
@@ -42,17 +44,32 @@ export default function PokemonCreate(){
         }, pokemons))
     }
 
-    function handleSelect(e){
-        setInput({
-            ...input,
-            types: [...input.types , e.target.value]
-        })
+    const handleChecked = e => {
+        const checked = e.target.checked;
 
-        setErrors(validate({
+        if (checked) {
+            setInput({
             ...input,
             types: [...input.types , e.target.value]
-        }, pokemons))
-    }
+            })
+
+            setErrors(validate({
+                ...input,
+                types: [...input.types , e.target.value]
+            }, pokemons))
+        } else if (!checked) {
+            setInput({
+                ...input,
+                types: input.types.filter(el => el !== e.target.value)
+                })
+
+            setErrors(validate({
+                ...input,
+                types: input.types.filter(el => el !== e.target.value)
+            }, pokemons))    
+        }
+
+    };
 
     function handleSubmit(e){
         e.preventDefault();
@@ -76,8 +93,9 @@ export default function PokemonCreate(){
 
 
     return(
-        <div>
-            <Link to='/home'><button className={style.back}>Go back</button></Link>
+        <div className={style.pagina}>
+            <img src={Oak} alt="Profesor Oak" height="560px" className={style.img}/>
+            <Link to='/home' className={style.back} style={{textDecoration: 'none'}}><button>Return home</button></Link>
             <div className={style.container}>
                 <div className={style.header}>
                     <h2>Create your pokemon!</h2>
@@ -237,19 +255,21 @@ export default function PokemonCreate(){
                             <i></i>
                         }
                     </div>
-                    <select onChange={(e) => handleSelect(e)}>
-                        {
-                            types.map( type => (
-                                <option value={type.name}>{type.name}</option>
-                            ))
-                        }
-                    </select>
-                    <ul><li style={{listStyle: 'none'}}>{input.types.map( el => el + " ,")}</li></ul>
-                        {
-                            errors.types && (
-                                <p style={{color: '#e74c3c'}}>{errors.types}</p>
-                            )
-                        }
+                    <div style={{position:'relative'}}> 
+                        <Checkbox types={types} handleChecked={handleChecked}/>
+                        
+                        <ul><li style={{listStyle: 'none'}} className={style.typeslist}>{input.types.map( el => el + " ,")}</li></ul>
+                            {
+                                errors.types ? (
+                                    <div className={style.typeserror}>
+                                        <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
+                                        <span>{errors.types}</span>
+                                    </div>
+                                ) :
+                                <i></i>
+                            }
+                    </div>
+                    
 
                     <button type='submit'>Create</button>
 

@@ -4,10 +4,10 @@ import { getPokemons, filterCreated, orderByNameOrStrengh, getTypes, filterPokem
 import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
-import SearchBar from '../SearchBar/SearchBar';
 import Navbar from '../Navbar/Navbar';
-import random from '../../images/random.png'
-import style from './Home.module.css'
+import random from '../../images/random.png';
+import style from './Home.module.css';
+import poke from '../../images/pokebola.png'
 
 
 export default function Home(){
@@ -59,9 +59,9 @@ export default function Home(){
         <div className={style.home}>
             <Navbar />
             
-            <button onClick={e => {handleClick(e)}}>Volver a cargar todos los Pokemones</button>
+            <button onClick={e => {handleClick(e)}} className={style.poke}><img src={poke} alt="pokebola" width='20px'/> Reload all</button>
 
-            <div>
+            <div className={style.sortfilter}>
                 <select onChange={e => handleSort(e)}>
                     <option value="asc">A - Z</option>
                     <option value="desc">Z - A</option>
@@ -99,7 +99,7 @@ export default function Home(){
                     )
                 }) :
                 <div className={style.loading}> 
-                    <img src='images/loading.gif'alt="Loading.." width='250px' style={{zIndex:'5'}}/>
+                    <img src='images/loading.gif'alt="Loading.." width='250px'/>
                     <p className={style.loadingtext}>Loading...</p>
                 </div>
             }

@@ -13,8 +13,8 @@ export default function validate(input, pokemons){
     if(!RegExpression.test(input.name)){
         errors.name = 'No se permiten numeros o caracteres especiales'
     }
-    if(input.name.length > 25){
-        errors.name = 'El nombre no puede tener mas de 25 caracteres'
+    if(input.name.length > 18){
+        errors.name = 'El nombre no puede tener mas de 18 caracteres'
     }
 
     if(input.hp < 1 || input.hp > 150){

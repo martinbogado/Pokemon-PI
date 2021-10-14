@@ -1,15 +1,54 @@
 
+.pagina{
+    background-image: url('../../images/fondo.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagina button{
+    background-color: rgba(233, 230, 38, 0.932);
+    border: 2px solid rgb(231, 216, 1);
+    border-radius: 4px;
+    color: rgb(0, 0, 0);
+    display: block;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    margin-left: 0%;
+}
+
+.img{
+    margin-right: 15%;
+    margin-top: 3%;
+}
+
+.back{
+    position: fixed;
+    left: 8%;
+    top: 4%;
+}
 
 .container{
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 5% rgba(0, 0, 0, 0.3);
-    width: 35rem;
+    width: 38rem;
     max-width: 50%;
     font-family: 'Open Sans', sans-serif;
-    overflow: hidden;
-    position: absolute;
-    right: 10%;
+    overflow-x: hidden;
+    right: 0%;
+    padding-bottom: 4%;
+    position: relative;
+    margin-bottom: 0.5%;
+    margin-top: 0.5%;
+    margin-right: 0.4%;
 }
 
 .header{
@@ -73,6 +112,22 @@
     cursor: pointer;
     margin-left: 7%;
 }
+
+.typeslist{
+    position: absolute;
+    bottom: 18%;
+    left: 42%;
+}
+
+.typeserror{
+    position: absolute;
+    font-size: 15px;
+    display: flex;
+    bottom: -50%;
+    left: 4%;
+    color: #e74c3c
+}
+
 
 /* Arrows from input number*/
 /* Chrome, Safari, Edge, Opera */
