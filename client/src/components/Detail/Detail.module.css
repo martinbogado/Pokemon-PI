@@ -1,30 +1,85 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
+.home{
+  position: absolute;
+  bottom: 4%;
+  left: 38%;
+}
+
+.homebtn{
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  border: none;
+
+  padding: 16px 32px;
+  color: #fff;
+  font-family: 'Roboto', Arial;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  line-height: 1;
+  border-radius: 8px;
+
+  background-image: linear-gradient(45deg, #2378c9 10%, #133079 90%);
+  background-position: 90% 0;
+  box-shadow: 0 2px 8px -1px #09113f;
+  
+  opacity: 0;
+  animation: showText 1s 1s linear forwards;
+  transition: all 0.5s ease;
+}
+.homebtn:hover{
+  box-shadow: 0 0px 0px 0 rgba(0, 40, 120, 0);
+  transform: translateY(-5px);
+}
+
 .grid {
     display: grid;
-    grid-template-columns: [x0] 1.2fr [x1] 2fr [x2];
+    grid-template-columns: [x0] 1.1fr [x1] 2fr [x2];
     grid-template-rows: [y0] 60px [y1] 2fr [y2] 1fr [y3];
-    
-  }
+}
+
+.visual{
+  grid-column: x0 / x1;
+  grid-row: y0 / y3;
+  height: 100vh;
+  background-color: #ececec;
+}  
 
 .img{
     grid-column: x0 / x1;
     grid-row: y1 / y2;
     height: 65vh;
-}  
+}
+
+.name{
+  font-size: 32px;
+}
 
 .encabezado{
     grid-column: x1 / x2;
     grid-row: y0 / y1;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     font-family: 'Poppins', sans-serif;
+    padding-left: 8%;
+    padding-right: 8%;
+    color: rgb(41, 41, 41);
 }
 
 .types{
     grid-column: x0 / x1;
     grid-row: y2 / y3;
     font-family: 'Poppins', sans-serif;
+}
+
+.typestitle{
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
 }
 
 .stats{
@@ -34,6 +89,9 @@
     display: flex;
     flex-flow: column;
     width: 500px;
+    padding-left: 4%;
+    padding-top: 4%;
+    color: rgb(41, 41, 41);
 }
 
 .stats .bar{
@@ -49,6 +107,49 @@
     bottom: 100%;
     opacity: 0;
     animation: showText 0.5s 1s linear forwards;
+}
+
+ /* Height and Weight */
+ 
+.about{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 4%;
+  opacity: 0;
+  animation: showText 1s 1s linear forwards;
+}
+
+.pokweight{
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  margin-left: 8%;
+}
+
+.weight{
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(51, 51, 51);
+}
+
+.pokheight{
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  margin-left: 8%;
+  
+}
+
+.height{
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(51, 51, 51);
 }
 
 
