@@ -38,6 +38,8 @@ const getApiInfo = async () => {
         types: pokeInfo.types.map((t) => t.type.name),
         img: pokeInfo.sprites.other['official-artwork'].front_default,
         attack: pokeInfo.stats[1].base_stat,
+        weight: pokeInfo.weight,
+        height: pokeInfo.height
       });
     }
     

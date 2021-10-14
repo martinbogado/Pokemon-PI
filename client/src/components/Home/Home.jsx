@@ -92,8 +92,8 @@ export default function Home(){
                 currentPokemons.length ? currentPokemons.map( el => {
                     return(
                         <div>
-                            <Link to={"/home/" + el.id}>
-                                <Card name={el.name} types={el.types} image={el.img ? el.img : random} id={el.id} key={el.id} />
+                            <Link to={"/home/" + el.id} style={{textDecoration:'none'}}>
+                                <Card name={el.name} types={el.types} image={el.img ? el.img : random} id={el.id} weight={el.weight} height={el.height} key={el.id} />
                             </Link>
                         </div>
                     )

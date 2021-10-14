@@ -25,7 +25,7 @@ export default function Detail (props){
                 myPokemon.length && myPokemon[0].id == props.match.params.id ? 
                 <div className={style.grid}>
                     <div className={style.encabezado}> 
-                        <h1>{myPokemon[0].name}</h1> 
+                        <h1>{myPokemon[0].name.charAt(0).toUpperCase() + myPokemon[0].name.slice(1)}</h1> 
                         <p>#{myPokemon[0].id}</p>
                     </div>
                    <img src={myPokemon[0].img ? myPokemon[0].img : random} className={style.img}/>

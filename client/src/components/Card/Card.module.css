@@ -1,15 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
 .card {
     position: relative;
-    display: flex;
-    flex-direction: column;
     min-height: 14em;
-    max-width: 20em;
+    width: 320px;
+    height: 414px;
+    text-decoration: none;
     border-radius: 0.75em;
     box-shadow: 0 3px 3px #0001;
     overflow: hidden;
+    display: grid;
+    grid-template-columns: [x0] 1fr [x1] 1fr [x2];
+    grid-template-rows: [y0] 40px [y1] 190px [y2] 26px [y3] 75px [y4] 30px [y5] 1fr [y6];
+    transition: all 0.4s ease;
   }
 
+.card:hover{
+  transform: translateY(-8px);
+} 
+
+.name{
+  grid-column: x0 / x1;
+  grid-row: y0/y1;
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: bolder;
+  color: white;
+  padding-left: 4%;
+  padding-top: 4%;
+}
+
 .img {
-    display:block;
-    margin:auto;
+  display:block;
+  margin:auto;
+  grid-column: x0 / x2;
+  grid-row: y1/y2;
 }  
+
+.typetitle{
+  grid-column: x0 / x2;
+  grid-row: y2/y3;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+}
+
+.types{
+  grid-column: x0 / x2;
+  grid-row: y3/y4;
+  display: flex;
+  justify-content: center;
+}
+
+.aboutitle{
+  grid-column: x0 / x2;
+  grid-row: y4/y5;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+}
+
+.about{
+  grid-column: x0 / x2;
+  grid-row: y5/y6;
+  display: flex;
+  justify-content: center;
+}
+
+/* About - Stats */
+
+.pokweight{
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  margin-left: 8%;
+}
+
+.weight{
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: rgb(51, 51, 51);
+}
+
+.pokheight{
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  margin-left: 8%;
+}
+
+.height{
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: rgb(51, 51, 51);
+}
+
+/* Colores de Titulos */
+
+.fire{
+  color:#F57D31
+}
+
+.normal{
+  color: #AAA67F
+}
+
+.fighting{
+  color: #C12239
+}
+
+.flying{
+  color: #A891EC
+}
+
+.ground{
+  color: #DEC16B
+}
+
+.poison{
+  color: #A43E9E
+}
+
+.rock{
+  color: #B69E31
+}
+
+.bug{
+  color: #A7B723
+}
+
+.ghost{
+  color: #70559B
+} 
+
+.steel{
+  color: #B7B9D0
+}
+
+.water{
+  color: #6493EB
+}
+
+.grass{
+  color: #74CB48
+}
+
+.electric{
+  color: #F9CF30
+}
+
+.psychic{
+  color: #FB5584
+}
+
+.ice{
+  color: #9AD6DF
+} 
+
+.dragon{
+  color: #7037FF
+}
+
+.dark{
+  color: #75574C
+}
+
+.fairy{
+  color: #E69EAC
+}
+
+.unknown{
+  color: #A9A7AA
+}
+
+.shadow{
+  color: #453F3A
+}
