@@ -2,7 +2,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: [x0] 1fr [x1] 2fr [x2];
+    grid-template-columns: [x0] 1.2fr [x1] 2fr [x2];
     grid-template-rows: [y0] 60px [y1] 2fr [y2] 1fr [y3];
     
   }

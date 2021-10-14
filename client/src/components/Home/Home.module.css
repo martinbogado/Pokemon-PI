@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
 .cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -7,13 +9,22 @@
 
 .home{
     background: #232631;
+    min-height: 100vh;
 }
 
 /* Loading  */
 
 .loading{
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 67vh;
+    background: #232631;
+    padding-top: 5%;
+}
+
+.loadingtext{
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
 }

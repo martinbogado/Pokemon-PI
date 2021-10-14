@@ -99,8 +99,8 @@ export default function Home(){
                     )
                 }) :
                 <div className={style.loading}> 
-                    <img src='images/loading.gif'alt="Loading.." width='250px'/>
-                    <p>Loading...</p>
+                    <img src='images/loading.gif'alt="Loading.." width='250px' style={{zIndex:'5'}}/>
+                    <p className={style.loadingtext}>Loading...</p>
                 </div>
             }
             </div>
