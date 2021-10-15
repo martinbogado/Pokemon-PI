@@ -29,11 +29,12 @@ export default function Home(){
 
     useEffect(() => {
         dispatch(getPokemons());
+        dispatch(getTypes());
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(getTypes());
-    }, [dispatch]);
+        setCurrentPage(1);
+      }, [allPokemons,setCurrentPage]);
 
     function handleClick(e){
         e.preventDefault();
@@ -42,14 +43,10 @@ export default function Home(){
 
     function handleFilterCreated(e){
         dispatch(filterCreated(e.target.value))
-        setCurrentPage(1);
-        setOrden(`Ordenado ${e.target.value}`)
     }
 
     function handleFilterByType(e){
         dispatch(filterPokemonsByType(e.target.value));
-        setCurrentPage(1);
-        setOrden(`Ordenado ${e.target.value}`)
     }
 
     function handleSort(e){

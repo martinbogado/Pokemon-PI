@@ -53,13 +53,6 @@ export function getPokemonName(name){
     }
 }
 
-// export function getPokemonName(payload){
-//     return {
-//         type:"GET_POKEMON_NAME",
-//         payload
-//     }
-// }
-
 export function getDetail (id){
     return async function (dispatch){
         try{

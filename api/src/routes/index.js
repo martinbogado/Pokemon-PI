@@ -134,21 +134,21 @@ router.get("/pokemons", async (req, res) => {
     const pokemonName = await getPokeInfoxName(name.toLowerCase());
 
     if (pokemonName) {
-      res.status(200).send([pokemonName]);
+      return res.status(200).send([pokemonName]);
     } else {
       const pokemonsDB = await getDbInfo();
       const pokemonNAM = pokemonsDB.filter(
         el => el.name.toLowerCase() == name.toLowerCase()
       );
 
-      pokemonNAM.length
+      return pokemonNAM.length
         ? res.status(200).send(pokemonNAM)
         : res.status(404).send("Pokemon not found");
     }
   } else {
     const pokemonsTotal = await getAllPokemons();
 
-    res.status(200).send(pokemonsTotal);
+    return res.status(200).send(pokemonsTotal);
   }
 });
 

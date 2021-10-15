@@ -39,8 +39,8 @@ export default function validate(input, pokemons){
     if(!input.types.length){
         errors.types = 'Debe elegir alguna clase'
     }
-    if(input.types.length > 3){
-        errors.types = 'No puede elegir mas de 3 tipos por Pokemon'
+    if(input.types.length > 2){
+        errors.types = 'No puede elegir mas de 2 tipos por Pokemon'
     }
     
     return errors;

@@ -255,6 +255,7 @@ export default function PokemonCreate(){
                         }
                     </div>
                     <div style={{position:'relative'}}> 
+                        <span>El usuario puede elegir hasta 2 tipos</span>
                         <Checkbox types={types} handleChecked={handleChecked}/>
                         
                         <ul><li style={{listStyle: 'none'}} className={style.typeslist}>{input.types.map( el => el + " ,")}</li></ul>
