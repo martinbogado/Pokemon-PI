@@ -9,14 +9,14 @@ export default function SearchBar(){
 
     function handleInputChange(e){
         e.preventDefault();
-        setName(e.target.value)
+        setName(e.target.value.replaceAll(/^\s+/g, "").replaceAll(/\s+/g, " "))
     }
 
     function handleSubmit(e){
         e.preventDefault();
         if(name !== ''){
             dispatch(getPokemonName(name))
-            setName(" ")
+            setName("")
         }
     }
 

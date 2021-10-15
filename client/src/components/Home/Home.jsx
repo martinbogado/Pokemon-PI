@@ -13,7 +13,7 @@ import poke from '../../images/pokebola.png'
 export default function Home(){
 
     const dispatch = useDispatch()
-    const allPokemons = useSelector((state) => state.pokemons)
+    const allPokemons = useSelector(state => state.pokemons)
     const types = useSelector(state => state.types)
 
     const [orden, setOrden] = useState('')
@@ -42,10 +42,14 @@ export default function Home(){
 
     function handleFilterCreated(e){
         dispatch(filterCreated(e.target.value))
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
     }
 
     function handleFilterByType(e){
-        dispatch(filterPokemonsByType(e.target.value))
+        dispatch(filterPokemonsByType(e.target.value));
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
     }
 
     function handleSort(e){
@@ -92,8 +96,8 @@ export default function Home(){
                 currentPokemons.length ? currentPokemons.map( el => {
                     return(
                         <div>
-                            <Link to={"/home/" + el.id} style={{textDecoration:'none'}}>
-                                <Card name={el.name} types={el.types} image={el.img ? el.img : random} id={el.id} weight={el.weight} height={el.height} key={el.id} />
+                            <Link to={"/home/" + el.id} style={{textDecoration:'none'}} key={el.id}>
+                                <Card name={el.name} types={el.types} image={el.img ? el.img : random} id={el.id} weight={el.weight} height={el.height} />
                             </Link>
                         </div>
                     )

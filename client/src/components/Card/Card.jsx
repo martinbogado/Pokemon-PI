@@ -46,7 +46,7 @@ export default function Card({ name, types, image, id, weight, height}){
                 {
                     types ? types.map( el => {
                         return(
-                            <img src={`images/types/${el}.png`} alt="Types" height="80px" />
+                            <img src={`images/types/${el}.png`} alt="Types" height="80px" key={el}/>
                         )
                      }
                     ) :

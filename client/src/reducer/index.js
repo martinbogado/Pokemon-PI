@@ -27,14 +27,9 @@ function rootReducer (state = initialState, action){
             }
         
         case "GET_POKEMON_NAME":
-            const pokemonName = action.payload
-            const allPokemonss = state.allPokemons
-            
-            const pokemon = pokemonName ? allPokemonss.filter( el => el.name === pokemonName) : allPokemonss
-
             return {
                 ...state,
-                pokemons: pokemon
+                pokemons: action.payload
             }    
 
         case "GET_DETAILS":

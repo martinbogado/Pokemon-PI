@@ -35,7 +35,7 @@ export default function PokemonCreate(){
     function handleChange(e){
         setInput({
             ...input,
-            [e.target.name] : e.target.value
+            [e.target.name] : e.target.value.replaceAll(/^\s+/g, "").replaceAll(/\s+/g, " ")
         })
 
         setErrors(validate({
@@ -44,10 +44,8 @@ export default function PokemonCreate(){
         }, pokemons))
     }
 
-    const handleChecked = e => {
-        const checked = e.target.checked;
-
-        if (checked) {
+    function handleChecked(e){
+        if (e.target.checked) {
             setInput({
             ...input,
             types: [...input.types , e.target.value]
@@ -57,7 +55,8 @@ export default function PokemonCreate(){
                 ...input,
                 types: [...input.types , e.target.value]
             }, pokemons))
-        } else if (!checked) {
+            
+        } else if (!e.target.checked) {
             setInput({
                 ...input,
                 types: input.types.filter(el => el !== e.target.value)
@@ -68,7 +67,6 @@ export default function PokemonCreate(){
                 types: input.types.filter(el => el !== e.target.value)
             }, pokemons))    
         }
-
     };
 
     function handleSubmit(e){
@@ -109,6 +107,7 @@ export default function PokemonCreate(){
                             name="name"
                             onChange={ (e) => handleChange(e) }
                             style={input.name.length ? errors.name ? {borderColor: '#e74c3c' } : {borderColor: '#2ecc71'} : {}}
+                            autocomplete="off"
                         />
                         {
                             errors.name ? (

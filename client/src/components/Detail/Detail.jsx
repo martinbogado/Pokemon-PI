@@ -40,7 +40,7 @@ export default function Detail (props){
                             {
                                 myPokemon[0].types ? myPokemon[0].types.map( el => {
                                     return(
-                                        <img src={`../../images/types/${el}.png`} alt="Types" height="140px" />
+                                        <img src={`../../images/types/${el}.png`} alt="Types" height="140px" key={el}/>
                                     )
                                 }
                                 ) :
@@ -53,7 +53,7 @@ export default function Detail (props){
                         <h3 style={{display:'flex'}}>Base stats</h3>
                         <div className={style.bar}>
                             <div className={style.info}>
-                                <span><i class="fas fa-heartbeat"></i> Hp</span>
+                                <span><i className="fas fa-heartbeat"></i> Hp</span>
                             </div>
                             <div className={style.progress} ><span style={{width:myPokemon[0].hp+'%'}} per={`${myPokemon[0].hp}`} className={style.hp}></span></div>  
                         </div>
@@ -65,7 +65,7 @@ export default function Detail (props){
                         </div>
                         <div className={style.bar}>
                             <div className={style.info}>
-                                <span><i class="fas fa-shield-alt"></i> Defense</span>
+                                <span><i className="fas fa-shield-alt"></i> Defense</span>
                             </div>
                             <div className={style.progress} style={{animationDelay:'0.2s'}}><span style={{width:myPokemon[0].defense+'%'}} per={`${myPokemon[0].defense}`} className={style.defense}></span></div>  
                         </div>

@@ -30,31 +30,35 @@ export function postPokemon(payload){
     return async function(dispatch){
         const pokemon = await axios.post("http://localhost:3001/pokemons", payload)
         
-        return pokemon
+        return {
+            type:"POST_POKEMON",
+            payload: pokemon
+        }
     }
 }
 
-// export function getPokemonName(name){
-//     return async function (dispatch){
-//         try{
-//             const json = await axios.get("http://localhost:3001/pokemons?name=" + name)
-           
-//             return dispatch({
-//                 type:"GET_POKEMON_NAME",
-//                 payload: name,
-//             })
-//         } catch(error){
-//             console.log(error)
-//         }
+export function getPokemonName(name){
+    return async function (dispatch){
+        try{
+            const json = await axios.get("http://localhost:3001/pokemons?name=" + name)
+            console.log(json.data)
+
+            return dispatch({
+                type:"GET_POKEMON_NAME",
+                payload: json.data
+            })
+        } catch(error){
+            console.log(error)
+        }
+    }
+}
+
+// export function getPokemonName(payload){
+//     return {
+//         type:"GET_POKEMON_NAME",
+//         payload
 //     }
 // }
-
-export function getPokemonName(payload){
-    return {
-        type:"GET_POKEMON_NAME",
-        payload
-    }
-}
 
 export function getDetail (id){
     return async function (dispatch){

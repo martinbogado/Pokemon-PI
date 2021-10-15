@@ -76,41 +76,81 @@ const getAllPokemons = async () => {
 }
 
 const getPokeInfo = async (id) => {
-  const apiPokeUrl = await axios.get("https://pokeapi.co/api/v2/pokemon/" + id);
-  const results = apiPokeUrl.data
-  
-  const pokemonInfo = {
-    id: results.id,
-    name: results.name,
-    types: results.types.map((t) => t.type.name),
-    img: results.sprites.other['official-artwork'].front_default,
-    hp: results.stats[0].base_stat,
-    attack: results.stats[1].base_stat,
-    defense: results.stats[2].base_stat,
-    speed: results.stats[5].base_stat,
-    weight: results.weight,
-    height: results.height
-  }
-  console.log(pokemonInfo)
+  try {
+    const apiPokeUrl = await axios.get("https://pokeapi.co/api/v2/pokemon/" + id);
+    const results = apiPokeUrl.data
+    
+    const pokemonInfo = {
+      id: results.id,
+      name: results.name,
+      types: results.types.map((t) => t.type.name),
+      img: results.sprites.other['official-artwork'].front_default,
+      hp: results.stats[0].base_stat,
+      attack: results.stats[1].base_stat,
+      defense: results.stats[2].base_stat,
+      speed: results.stats[5].base_stat,
+      weight: results.weight,
+      height: results.height
+    }
 
-  return pokemonInfo;
+    return pokemonInfo;
+  } catch (e) {
+    if (e.status === 404) return null;
+  }
 }
 
+const getPokeInfoxName = async (name) => {
+  try {
+    const apiPokeUrl = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon/" + name
+    );
+    const results = apiPokeUrl.data;
 
-router.get('/pokemons', async (req, res) => {
-    const name = req.query.name
-    let pokemonsTotal = await getAllPokemons()
+    const pokemonInfo = {
+      id: results.id,
+      name: results.name,
+      types: results.types.map((t) => t.type.name),
+      img: results.sprites.other["official-artwork"].front_default,
+      // hp: results.stats[0].base_stat,
+      // attack: results.stats[1].base_stat,
+      // defense: results.stats[2].base_stat,
+      // speed: results.stats[5].base_stat,
+      weight: results.weight,
+      height: results.height,
+    };
+    console.log(pokemonInfo);
 
-    if(name){
-       let pokemonName = pokemonsTotal.filter( el => el.name.toLowerCase().includes(name.toLowerCase()))
+    return pokemonInfo;
+  } catch (e) {
+    if (e.status === 404) return null;
+  }
+};
 
-       pokemonName.length ? 
-       res.status(200).send(pokemonName) :
-       res.status(404).send('No pokemon found')
+
+router.get("/pokemons", async (req, res) => {
+  const name = req.query.name;
+
+  if (name) {
+    const pokemonName = await getPokeInfoxName(name.toLowerCase());
+
+    if (pokemonName) {
+      res.status(200).send([pokemonName]);
     } else {
-       res.status(200).send(pokemonsTotal)  
+      const pokemonsDB = await getDbInfo();
+      const pokemonNAM = pokemonsDB.filter(
+        el => el.name.toLowerCase() == name.toLowerCase()
+      );
+
+      pokemonNAM.length
+        ? res.status(200).send(pokemonNAM)
+        : res.status(404).send("Pokemon not found");
     }
-})
+  } else {
+    const pokemonsTotal = await getAllPokemons();
+
+    res.status(200).send(pokemonsTotal);
+  }
+});
 
 router.get('/types', async (req, res) => {
   const typesApi = await axios.get("https://pokeapi.co/api/v2/type");
@@ -164,13 +204,11 @@ router.get('/pokemons/:idPokemon', async (req, res) => {
   const { idPokemon } = req.params
   
   let pokemonInfo;
-  if(idPokemon >= 1 && idPokemon <= 40 ){
-    pokemonInfo = await getPokeInfo(idPokemon)
-    const pokemonID = []
-    pokemonID.push(pokemonInfo)
+  if(idPokemon >= 1 && idPokemon <= 1118 ){
+    const pokemonInfo = await getPokeInfo(idPokemon)
     
-    pokemonID.length ?
-    res.status(200).send(pokemonID) :
+    pokemonInfo ?
+    res.status(200).send([pokemonInfo]) :
     res.status(404).send('Pokemon not found')
   }
 
