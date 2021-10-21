@@ -1,3 +1,13 @@
+:root {
+    --fire: #F57D31;
+  }
+
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}
 
 .pagina{
     background-image: url('../../images/fondo.jpg');
@@ -110,22 +120,77 @@
     padding: 10px;
     width: 50%;
     cursor: pointer;
+    margin-top: 8%;
     margin-left: 7%;
 }
 
-.typeslist{
-    position: absolute;
-    bottom: 18%;
-    left: 42%;
+.container .previous{
+    background-color: rgb(181, 225, 228);
+    border: 2px solid rgb(136, 209, 214);
+    color: rgb(0, 0, 0);
+    width: 40%;
+    margin-top: 0%;
+}
+
+.container .create{
+    width: 40%;
+    color: rgb(218, 218, 218);
+    margin-top: 0%;
+    transition: all 0.4s ease; 
+}
+.container .create:hover{
+    background-color: rgb(23, 226, 241);
+    border: 2px solid rgb(2, 245, 233);
+    color: rgb(255, 255, 255); 
 }
 
 .typeserror{
     position: absolute;
     font-size: 15px;
     display: flex;
-    bottom: -50%;
+    bottom: -8%;
     left: 4%;
     color: #e74c3c
+}
+
+.containertypes{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: flex-start;
+    margin-left: 4%;
+    margin-bottom: 12%;
+    margin-top: 4%;
+}
+
+.containertypes label{
+    cursor: pointer;
+    margin-bottom: 4%;
+}
+
+.containertypes label input[type='checkbox']{
+    display: none;
+}
+
+.containertypes label:hover .circle {
+    filter: grayscale(0%) opacity(100%);
+}
+
+.containertypes label input[type='checkbox']:checked ~ .circle {
+    filter: grayscale(0%) opacity(95%);
+}
+
+
+.bytype{
+    display: flex;
+    align-items: center;
+    
+}
+
+.circle{
+    filter: grayscale(100%) opacity(50%) ;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
 }
 
 
@@ -141,3 +206,4 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+

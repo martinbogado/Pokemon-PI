@@ -15,6 +15,8 @@ export default function PokemonCreate(){
     const history = useHistory()
 
     const [errors, setErrors] = useState({})
+    const [section, setSection] = useState(1);
+
 
     const [input, setInput] = useState({
         name: '',
@@ -26,6 +28,29 @@ export default function PokemonCreate(){
         height: '',
         types: [],
     })
+
+    const typesColors={
+        fire: '#F57D31',
+        normal: '#AAA67F',
+        fighting: '#D3425F',
+        flying: '#A891EC',
+        ground: '#DEC16B',
+        poison: '#A43E9E',
+        rock: '#B69E31',
+        bug: '#A7B723',
+        ghost: '#70559B',
+        steel: '#5695A3',
+        water: '#6493EB',
+        grass: '#74CB48',
+        electric: '#F9CF30',
+        psychic: '#FB5584',
+        ice: '#9AD6DF',
+        dragon: '#7037FF',
+        dark: '#75574C',
+        fairy: '#E69EAC',
+        unknown: '#BF5481',
+        shadow: '#36045E'
+    }
 
 
     useEffect(() => {
@@ -42,6 +67,15 @@ export default function PokemonCreate(){
             ...input,
             [e.target.name] : e.target.value
         }, pokemons))
+    }
+
+    
+    function handleSection(e){
+        e.preventDefault();
+
+        if(Object.keys(errors).length === 1 && errors.types.length){
+            setSection(section === 1 ? 2 : 1); 
+        }
     }
 
     function handleChecked(e){
@@ -99,6 +133,7 @@ export default function PokemonCreate(){
                     <h2>Create your pokemon!</h2>
                 </div>
                 <form onSubmit={ (e) => handleSubmit(e) }>
+                    <section className={section === 1 ? style.show : style.hide}>
                     <div className={style.formdiv} >
                         <label>Name</label>
                         <input 
@@ -253,25 +288,53 @@ export default function PokemonCreate(){
                             :
                             <i></i>
                         }
-                    </div>
-                    <div style={{position:'relative'}}> 
-                        <span>El usuario puede elegir hasta 2 tipos</span>
-                        <Checkbox types={types} handleChecked={handleChecked}/>
-                        
-                        <ul><li style={{listStyle: 'none'}} className={style.typeslist}>{input.types.map( el => el + " ,")}</li></ul>
-                            {
-                                errors.types ? (
-                                    <div className={style.typeserror}>
-                                        <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
-                                        <span>{errors.types}</span>
-                                    </div>
-                                ) :
-                                <i></i>
-                            }
-                    </div>
-                    
 
-                    <button type='submit'>Create</button>
+                        <button onClick={(e) => {handleSection(e)}}>Next</button>
+                    </div>
+                    </section>
+                    <section className={section === 2 ? style.show : style.hide}>
+                        <div style={{position:'relative'}}> 
+                            <span>El usuario puede elegir hasta 2 tipos</span>
+
+                            <div className={style.containertypes}>
+                            {
+                                types.map( type => (
+                                    <label for={type.name}>
+                                        <div className={style.bytype} > 
+                                            <input 
+                                                    type="checkbox" 
+                                                    id={type.name} 
+                                                    value={type.name}
+                                                    onChange={(e) => handleChecked(e)}
+                                            />
+                                            <div className={style.circle} style={{display:'flex', alignItems:'center', justifyContent:'center', backgroundColor:typesColors[type.name]}}
+                                            ><img src={`images/icons/${type.name}.svg`} alt={`${type.name}`} height="16px" /></div>
+                                            <div style={{width:'8px'}}></div>       
+                                            {type.name}
+                                        </div>
+                                    </label>
+                                ))
+                            }  
+                            </div>  
+                            
+                                {
+                                    errors.types ? (
+                                        <div className={style.typeserror}>
+                                            <i className="fas fa-exclamation-circle" style={{color: '#e74c3c'}}></i>
+                                            <span>{errors.types}</span>
+                                        </div>
+                                    ) :
+                                    <i></i>
+                                }
+                        </div>  
+
+                        <div style={{display:'flex', flexFlow:'row nowrap'}}> 
+                            <button className={style.previous} onClick={(e) => {handleSection(e)}}>Previous</button>
+                            <button className={style.create} type='submit'>Create</button>
+                        </div>
+                        
+                    </section>   
+                    
 
                 </form>
             </div>
