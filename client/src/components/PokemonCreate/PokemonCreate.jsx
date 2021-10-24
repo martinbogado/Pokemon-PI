@@ -289,8 +289,8 @@ export default function PokemonCreate(){
                             <i></i>
                         }
 
-                        <button onClick={(e) => {handleSection(e)}}>Next</button>
                     </div>
+                    <button onClick={(e) => {handleSection(e)}}>Next</button>
                     </section>
                     <section className={section === 2 ? style.show : style.hide}>
                         <div style={{position:'relative'}}> 

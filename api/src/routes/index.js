@@ -8,6 +8,73 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+const random = (arrlength) => {
+  let number = Math.floor(Math.random() * arrlength);
+  return number
+ }
+
+const arreglo = (arr) => {
+  let results = []
+
+  if(arr[0] && arr[0].hasOwnProperty('move')){
+    const one = arr[random(arr.length)];
+    const two = arr[random(arr.length)];
+    const three = arr[random(arr.length)];
+
+    results.push(one.move.name, two.move.name, three.move.name)
+  } else{
+    if(arr.length > 1){
+      const one = arr[random(arr.length)]['location_area'].name;
+      const two = arr[random(arr.length)]['location_area'].name;
+
+      one !== two ? results.push(one, two) : results.push(one)
+    } else{
+      arr[0] ? results.push(arr[0]['location_area'].name) : results
+    }
+  }
+  return results
+ } 
+
+const evolution = async (evol) => {
+  try {
+    let evoChain = [];
+    let evoData = evol.chain;
+
+    do {
+      let evoDetails = evoData['evolution_details'][0];
+      const apiPokeUrl = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon/" + evoData.species.name
+      );
+
+      let result = {
+        name: evoData.species.name,
+        img: apiPokeUrl.data.sprites.other["official-artwork"].front_default,
+      }
+    
+      if(evoDetails){
+        for(prop in evoDetails){
+          if(evoDetails[prop]){
+            if(typeof evoDetails[prop] === 'object'){
+              result[prop] = evoDetails[prop].name
+            } else{
+              result[prop] = evoDetails[prop]
+            }
+          }
+        }
+      }
+      evoChain.push(result)
+
+      evoData = evoData['evolves_to'][0];
+    } while (evoData && evoData.hasOwnProperty('evolves_to'));
+
+    return evoChain
+
+  } catch (e) {
+    console.error(e)
+  }
+} 
+
+
 const getApiInfo = async () => {
     const apiUrl = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=40");
     const results = apiUrl.data.results
@@ -79,8 +146,27 @@ const getPokeInfo = async (id) => {
   try {
     const apiPokeUrl = await axios.get("https://pokeapi.co/api/v2/pokemon/" + id);
     const results = apiPokeUrl.data
+    const apiPokeSpecie = await axios.get(results.species.url)
+    const speciesresult = apiPokeSpecie.data
+    const pokeEvolution = await axios.get(speciesresult['evolution_chain'].url)
+
+    const allDescriptions = speciesresult["flavor_text_entries"].filter( el => el.language.name === 'en')
+    const speciespok = speciesresult.genera.filter( el => el.language.name === 'en')
+    const locations = await axios.get(results['location_area_encounters'])
+    const moves = results.moves
     
+
     const pokemonInfo = {
+      // ABOUT
+      abilities: results.abilities ? results.abilities.map( a => a.ability.name) : null,
+      growth: speciesresult['growth_rate'] ? speciesresult['growth_rate'].name : null,
+      habitat: speciesresult.habitat ? speciesresult.habitat.name : null,
+      description: allDescriptions[random(allDescriptions.length)]['flavor_text'].replace('POKéMON', 'Pokémon'),
+      species: speciespok[0].genus ? speciespok[0].genus : null,
+      locations: arreglo(locations.data),
+      moves: arreglo(moves),
+
+      // STATS
       id: results.id,
       name: results.name,
       types: results.types.map((t) => t.type.name),
@@ -90,11 +176,18 @@ const getPokeInfo = async (id) => {
       defense: results.stats[2].base_stat,
       speed: results.stats[5].base_stat,
       weight: results.weight,
-      height: results.height
+      height: results.height,
+      happiness: speciesresult['base_happiness'],
+      capture: speciesresult['capture_rate'],
+
+      //EVOLUTION
+      evolution: await evolution(pokeEvolution.data)
     }
+    console.log(pokemonInfo)
 
     return pokemonInfo;
   } catch (e) {
+    console.error(e);
     if (e.status === 404) return null;
   }
 }
@@ -111,10 +204,6 @@ const getPokeInfoxName = async (name) => {
       name: results.name,
       types: results.types.map((t) => t.type.name),
       img: results.sprites.other["official-artwork"].front_default,
-      // hp: results.stats[0].base_stat,
-      // attack: results.stats[1].base_stat,
-      // defense: results.stats[2].base_stat,
-      // speed: results.stats[5].base_stat,
       weight: results.weight,
       height: results.height,
     };
@@ -163,7 +252,7 @@ router.get('/types', async (req, res) => {
   })
 
   const allTypes = await Type.findAll();
-  res.send(allTypes);
+  return res.send(allTypes);
 })
 
 router.post('/pokemons', async (req, res) => {
@@ -197,7 +286,7 @@ router.post('/pokemons', async (req, res) => {
   })
 
   pokemonCreated.addType(pokemonTypes)
-  res.send('Pokemon created successfuly')
+  return res.send('Pokemon created successfuly')
 })
 
 router.get('/pokemons/:idPokemon', async (req, res) => {
@@ -207,7 +296,7 @@ router.get('/pokemons/:idPokemon', async (req, res) => {
   if(idPokemon >= 1 && idPokemon <= 1118 ){
     const pokemonInfo = await getPokeInfo(idPokemon)
     
-    pokemonInfo ?
+    return pokemonInfo ?
     res.status(200).send([pokemonInfo]) :
     res.status(404).send('Pokemon not found')
   }
@@ -217,7 +306,7 @@ router.get('/pokemons/:idPokemon', async (req, res) => {
   if(!pokemonInfo && idPokemon){
     const pokemonId = pokemonsTotal.filter( el => el.id == idPokemon )
 
-    pokemonId.length ?
+    return pokemonId.length ?
     res.status(200).send(pokemonId) :
     res.status(404).send('Pokemon not found')
   }

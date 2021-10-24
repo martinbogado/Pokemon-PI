@@ -68,6 +68,12 @@ export function getDetail (id){
     }
 }
 
+export function removeDetail(){
+    return {
+        type:"REMOVE_DETAILS",
+    }
+}
+
 export function filterPokemonsByType(payload){
     return {
         type:"FILTER_BY_TYPES",
