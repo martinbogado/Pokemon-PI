@@ -88,6 +88,7 @@ export default function Home(){
                 pokemonsPerPage={pokemonsPerPage}
                 allPokemons = {allPokemons.length}
                 paginado={paginado}
+                page={currentPage}
             />
             <div className={style.cards}>
             {

@@ -61,10 +61,10 @@
     width: 94%;
     margin-left: 2%;
     margin-top: 4%;
-    color: rgb(77, 77, 77);
+    color: rgb(95, 95, 95);
 }
 
-.combatinfo{
+.importantinfo{
   margin-top: 4%;
   display: grid;
   grid-template-columns: [x0] 30vw [x1] 30vw [x2];
@@ -77,6 +77,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   height: min-content;
+  color: rgb(41, 41, 41);
 }
 
 .visual{
@@ -206,7 +207,12 @@
   padding-top: 4%;
   margin-right: 40%;
   opacity: 0;
-  animation: showText 1s 1s linear forwards;
+
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0, 0.5, 0, 1);
+  animation-fill-mode: both;
+  animation-name: slideLeft;
+  animation-delay: 1800ms;
 }
 
 .aboutwo{
@@ -216,7 +222,12 @@
   align-items: flex-start;
   padding-top: 4%;
   opacity: 0;
-  animation: showText 1s 1s linear forwards;
+
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0, 0.5, 0, 1);
+  animation-fill-mode: both;
+  animation-name: slideRight;
+  animation-delay: 2000ms;
 }
 
 
@@ -252,6 +263,108 @@
   width: 25vh;
   color: rgb(51, 51, 51);
 }
+
+/* ANIMACIONES */
+
+@keyframes picImage {
+  from {
+  opacity: 0;
+  transform: scale(1.2) translateY(-1rem);
+  }
+  to {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  }
+}
+@keyframes slideDown {
+  from {
+  opacity: 0;
+  transform: translateY(-1rem);
+  }
+  to {
+  opacity: 1;
+  transform: translateY(0);
+  }
+}
+@keyframes slideLeft {
+  from {
+  opacity: 0;
+  transform: translateX(-1rem);
+  }
+  to {
+  opacity: 1;
+  transform: translateX(0);
+  }
+}
+@keyframes slideRight {
+  from {
+  opacity: 0;
+  transform: translateX(1rem);
+  }
+  to {
+  opacity: 1;
+  transform: translateX(0);
+  }
+}
+
+.descripok,
+.combatinfo,
+.breedinginfo,
+.animabil,
+.animoves,
+.animspecie,
+.animhabitat,
+.animgrowth,
+.animlocation {
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0, 0.5, 0, 1);
+  animation-fill-mode: both;
+}
+.img {
+  animation-duration: 750ms;
+  animation-timing-function: cubic-bezier(0, 0.5, 0.25, 1.25);
+  animation-fill-mode: both;
+  animation-name: picImage;
+}
+
+.descripok{
+  animation-name: slideDown;
+  animation-delay: 200ms;
+}
+.combatinfo,
+.animabil,
+.animoves {
+  animation-name: slideLeft;
+  animation-delay: 400ms;
+}
+.animabil {
+  animation-delay: 600ms;
+}
+.animoves {
+  animation-delay: 800ms;
+}
+
+.breedinginfo,
+.animspecie,
+.animhabitat,
+.animgrowth,
+.animlocation {
+  animation-name: slideRight;
+  animation-delay: 800ms;
+}
+.animspecie {
+  animation-delay: 1000ms;
+}
+.animhabitat {
+  animation-delay: 1100ms;
+}
+.animgrowth {
+  animation-delay: 1200ms;
+}
+.animlocation {
+  animation-delay: 1400ms;
+}
+
 
 
 /* Stats Progress Bar */
@@ -336,6 +449,7 @@
   .speed::after{
     content: attr(per);
   }
+
 
 
 

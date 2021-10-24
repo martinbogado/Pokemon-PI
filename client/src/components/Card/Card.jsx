@@ -4,7 +4,7 @@ import style from './Card.module.css'
 export default function Card({ name, types, image, id, weight, height}){
 
     let sprite;
-    if(id >= 1 && id <= 40){
+    if(id >= 1 && id <= 100){
         sprite = true
     }
 
@@ -37,7 +37,7 @@ export default function Card({ name, types, image, id, weight, height}){
              <span className={style.name}>{name.charAt(0).toUpperCase() + name.slice(1)}</span>
             {
                 sprite ?
-                <img src={`images/sprites/${id}-front-n.gif`} alt="Img not found" height="190px" className={style.img}/>
+                <img src={`images/sprites/${id}.gif`} alt="Img not found" height="190px" className={style.img}/>
                 :
                 <img src={image} alt="Img not found" height="190px" className={style.img}/>
             }
