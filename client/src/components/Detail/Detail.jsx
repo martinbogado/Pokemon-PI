@@ -5,6 +5,7 @@ import { getDetail } from '../../actions';
 import random from '../../images/random.png'
 import loading from '../../images/loading.gif'
 import style from './Detail.module.css'
+import EvolutionChain from '../EvolutionChain/EvolutionChain';
 
 import sword from '../../images/cards/sword.png'
 import speed from '../../images/cards/run.png'
@@ -19,6 +20,7 @@ import squirtle from '../../images/ssbu/squirtle.png';
 import ivysaur from '../../images/ssbu/ivysaur.png';
 import jigglypuff from '../../images/ssbu/jigglypuff.png';
 import lucario from '../../images/ssbu/lucario.png';
+
 
 export default function Detail (props){
     
@@ -59,6 +61,7 @@ export default function Detail (props){
         }
     }
 
+
     return(
         <div>
             {
@@ -80,12 +83,12 @@ export default function Detail (props){
                             <img src={pokemonssbu[myPokemon[0].name]} className={style.img}/> :
                             <img src={myPokemon[0].img ? myPokemon[0].img : random} className={style.img}/>
                         }
-                        <span className={style.typestitle}>Types</span>
+                        
                         <div className={style.types}>
                             {
                                 myPokemon[0].types ? myPokemon[0].types.map( el => {
                                     return(
-                                        <img src={`../../images/types/${el}.png`} alt="Types" height="140px" key={el}/>
+                                        <img src={`../../images/types/${el}.png`} alt="Types" height="160px" key={el}/>
                                     )
                                 }
                                 ) :
@@ -113,9 +116,9 @@ export default function Detail (props){
                                             <span>Abilities</span>
                                             <div className={style.apinfo}>
                                                 {
-                                                    myPokemon[0].abilities ? myPokemon[0].abilities.map( el => {
+                                                    myPokemon[0].abilities.length ? myPokemon[0].abilities.map( el => {
                                                         return(
-                                                            <span style={{width:'15vw', display: 'flex', justifyContent:'flex-start'}}>{el}</span>
+                                                            <span style={{width:'15vw', display: 'flex', justifyContent:'flex-start'}}>{el.replace('-', ' ')}</span>
                                                         )
                                                     }) :
                                                     <span>This pokemon has no abilities</span>
@@ -126,12 +129,12 @@ export default function Detail (props){
                                             <span>Moves</span>
                                             <div className={style.apinfo}>
                                                 {
-                                                    myPokemon[0].moves ? myPokemon[0].moves.map( el => {
+                                                    myPokemon[0].moves.length ? myPokemon[0].moves.map( el => {
                                                         return(
-                                                            <span style={{display:'inline-block'}}><img src={capture} alt='Capture' height='13px' width='13px'/> {el}</span>
+                                                            <span style={{display:'inline-block'}}><img src={capture} alt='Capture' height='13px' width='13px'/> {el.replace('-', ' ')}</span>
                                                         )
                                                     }) :
-                                                    <span>This pokemon has no moves</span>
+                                                    <span style={{width:'17vw'}}>This pokemon has no moves</span>
                                                 }
                                             </div>
                                         </div>  
@@ -263,8 +266,21 @@ export default function Detail (props){
                    <section className={section === 3 ? style.show : style.hide}>
                        {
                            !myPokemon[0].createdInDb ? 
-                           <div> 
-                        
+                           <div className={style.evolutions}>
+                            {
+                                myPokemon[0].evolution && myPokemon[0].evolution.length > 1 ?
+                                <div>
+                                    <EvolutionChain pokone={myPokemon[0].evolution[0]} poktwo={myPokemon[0].evolution[1]}/>
+                                    {
+                                        myPokemon[0].evolution[2] ? 
+                                        <EvolutionChain pokone={myPokemon[0].evolution[1]} poktwo={myPokemon[0].evolution[2]}/> 
+                                        : <div></div>  
+                                    }
+                                </div> :
+                                <div className={style.noevolution}>
+                                    This pokemon has no evolutions
+                                </div>
+                            }    
                            </div> :
                            <div></div>
                        }

@@ -59,7 +59,7 @@
 .firstinfo{
     font-family: 'Poppins', sans-serif;
     width: 94%;
-    margin-left: 2%;
+    margin-left: 4%;
     margin-top: 4%;
     color: rgb(95, 95, 95);
 }
@@ -91,6 +91,7 @@
     grid-column: x0 / x1;
     grid-row: y2 / y3;
     height: 65vh;
+    margin-top: 4%;
     /* filter: grayscale(100%) brightness(0);  */
     filter: drop-shadow(8px 8px 8px rgb(107, 107, 107));
 }
@@ -160,15 +161,9 @@
     grid-column: x0 / x1;
     grid-row: y2 / y3;
     font-family: 'Poppins', sans-serif;
+    margin-top: 4%;
 }
 
-.typestitle{
-  font-family: 'Poppins', sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-}
 
 .stats{
     grid-column: x1 / x2;
@@ -451,6 +446,26 @@
   }
 
 
+
+  /* Evolutions */
+
+  .evolutions{
+    grid-column: x1 / x2;
+    grid-row: y2 / y3;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-top: 2%;
+  }
+  
+  .noevolution{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    margin-top: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 
   /* Loading Pikachu */

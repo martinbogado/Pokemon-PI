@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react' ;
 import { useDispatch, useSelector } from 'react-redux' ;
-import { getPokemons, filterCreated, orderByNameOrStrengh, getTypes, removeDetail, filterPokemonsByType } from '../../actions';
+import { getPokemons, filterCreated, orderByNameOrStrengh, getTypes, removeDetail, filterPokemonsByType, reloadPokemons } from '../../actions';
 import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
@@ -39,7 +39,7 @@ export default function Home(){
 
     function handleClick(e){
         e.preventDefault();
-        dispatch(getPokemons());
+        dispatch(reloadPokemons());
     }
 
     function handleFilterCreated(e){
@@ -65,6 +65,7 @@ export default function Home(){
 
             <div className={style.sortfilter}>
                 <select onChange={e => handleSort(e)}>
+                    <option value="normal">Normal</option>
                     <option value="asc">A - Z</option>
                     <option value="desc">Z - A</option>
                     <option value="HAttack">+ Attack</option>
@@ -76,7 +77,7 @@ export default function Home(){
                     <option value="Created">Created</option>
                 </select>
                 <select onChange={e => handleFilterByType(e)}>
-                    <option value="All">all</option>
+                    <option value="All">all types</option>
                     {
                         types.map( type => (
                             <option value={type.name} key={type.name}>{type.name}</option>

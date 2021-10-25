@@ -60,6 +60,10 @@ const evolution = async (evol) => {
               result[prop] = evoDetails[prop]
             }
           }
+          if(prop === 'held_item' && evoDetails[prop]){
+            let item = await axios.get(evoDetails[prop].url)
+            result.itemimg = item.data.sprites.default
+          }
         }
       }
       evoChain.push(result)
@@ -293,7 +297,7 @@ router.get('/pokemons/:idPokemon', async (req, res) => {
   const { idPokemon } = req.params
   
   let pokemonInfo;
-  if(idPokemon >= 1 && idPokemon <= 1118 ){
+  if(idPokemon >= 1 && idPokemon <= 898 || idPokemon >= 10001 && idPokemon <= 10220){
     const pokemonInfo = await getPokeInfo(idPokemon)
     
     return pokemonInfo ?

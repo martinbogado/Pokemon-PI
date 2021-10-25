@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.evolutions{
+    display: flex;
+    margin-top: 4%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: rgb(61, 61, 61);
+}
+
+.trigger{
+    width: 24vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ANIMACIONES */
+
+@keyframes picImage {
+    from {
+    opacity: 0;
+    transform: scale(1.2) translateY(-1rem);
+    }
+    to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    }
+}
+  @keyframes slideUp {
+    from {
+    opacity: 0;
+    transform: translateY(1rem);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+}
+@keyframes slideDown {
+    from {
+    opacity: 0;
+    transform: translateY(-1rem);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+}
+  
+  .pokone,
+  .poktwo,
+  .trigger,
+  .triggertext {
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0, 0.5, 0, 1);
+    animation-fill-mode: both;
+  }
+
+  .pokone,
+  .poktwo {
+    animation-name: picImage;
+  }
+
+  .trigger {
+    animation-name: slideDown;
+  }
+
+  .pokone{
+      animation-delay: 200ms;
+  }
+  .trigger{
+    animation-delay: 500ms;
+  }
+  .poktwo{
+    animation-delay: 800ms;
+  }
+
+  .triggertext{
+    animation-name: slideUp; 
+    animation-delay: 600ms;
+  }
+
+
+  
+  
+ 
+  

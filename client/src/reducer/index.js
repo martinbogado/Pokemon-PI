@@ -14,6 +14,12 @@ function rootReducer (state = initialState, action){
                 pokemons: action.payload,
                 allPokemons: action.payload
             }
+
+        case "RELOAD_POKEMONS":
+            return {
+                ...state,
+                pokemons: state.allPokemons
+            }    
         
         case "GET_TYPES":
             return {
@@ -47,8 +53,7 @@ function rootReducer (state = initialState, action){
         case "FILTER_BY_TYPES":
             const allPokemons = state.allPokemons
             const statusFiltered = action.payload === "All" ? allPokemons : allPokemons.filter(el => el.types.includes(action.payload) )
-            // console.log(statusFiltered)
-            // console.log(action.payload)
+            
             return {
                 ...state,
                 pokemons: statusFiltered
@@ -110,7 +115,17 @@ function rootReducer (state = initialState, action){
                         return 0;
                     }) 
             }
-            
+            if(action.payload === 'normal'){
+                sortedArray = state.pokemons.sort(function (a, b){
+                        if(a.id > b.id){
+                            return 1;
+                        }
+                        if(b.id > a.id){
+                            return -1;
+                        }
+                        return 0;
+                    }) 
+            }
 
             return {
                 ...state,

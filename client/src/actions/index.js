@@ -13,6 +13,12 @@ export function getPokemons(){
     }
 }
 
+export function reloadPokemons(){
+    return {
+        type:"RELOAD_POKEMONS",
+    }
+}
+
 export function getTypes(){
     return async function(dispatch){
         var info = await axios.get("http://localhost:3001/types",{
