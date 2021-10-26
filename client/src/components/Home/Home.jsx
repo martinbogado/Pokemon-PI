@@ -96,7 +96,9 @@ export default function Home(){
             />
             <div className={style.cards}>
             {
-                currentPokemons.length ? currentPokemons.map( el => {
+                currentPokemons.length ? 
+                typeof currentPokemons[0] === 'object' ?
+                currentPokemons.map( el => {
                     return(
                         <div>
                             <Link to={"/home/" + el.id} style={{textDecoration:'none'}} key={el.id}>
@@ -105,6 +107,11 @@ export default function Home(){
                         </div>
                     )
                 }) :
+                <div className={style.notfound}>
+                    <img src='images/notfound.png'alt="Pokemon not found" width='200px'/>
+                    <span>Pokemon not found</span>
+                </div>
+                :
                 <div className={style.loading}> 
                     <img src='images/loading.gif'alt="Loading.." width='250px'/>
                     <p className={style.loadingtext}>Loading...</p>

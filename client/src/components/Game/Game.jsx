@@ -18,7 +18,7 @@ export default function Game(){
     const [game, setGame] = useState(false)
 
     const myPokemon = useSelector( state => state.detail)
-    console.log(myPokemon[0] ? myPokemon[0].name : 'no hay nombre')
+    // console.log(myPokemon[0] ? myPokemon[0].name : 'no hay nombre')
 
     useEffect( () => {
         if(!myPokemon.length){
@@ -36,17 +36,22 @@ export default function Game(){
 
     function handleChange(e){
         e.preventDefault();
+
+        if(myPokemon[0]){
         setInput(e.target.value.replaceAll(/^\s+/g, "").replaceAll(/\s+/g, " "))
+        }
     }
 
     function handleSubmit(e){
         e.preventDefault();
-        setGame(true)
-        setInput('')
-
-        input.toLowerCase() === myPokemon[0].name.toLowerCase() ?
-        handleSuccess() :
-        handleFailure()
+        if(myPokemon[0]){
+            setGame(true)
+            setInput('')
+    
+            input.toLowerCase() === myPokemon[0].name.toLowerCase() ?
+            handleSuccess() :
+            handleFailure()
+        }
     }
 
     async function handleSuccess(){
@@ -77,18 +82,26 @@ export default function Game(){
                 <img src={myPokemon[0].img} style={ game ? {filter: 'grayscale(0) brightness(100%)'} : {}} className={style.img} alt="Pokemon" width='220px'/> :
                 <img src={gamegif} className={style.img} alt="Loading game" width='220px'/>
               }
-              <form onSubmit={(e) => handleSubmit(e)}>
-                  <input type='text' onChange={(e) => handleChange(e)} value={input} name='repeat'/>
+              <span className={style.introduction}>Test your knowledge with this guess Pokemon game!</span>
+              <form onSubmit={(e) => handleSubmit(e)} className={style.form}>
+                  <input 
+                    type='text' 
+                    onChange={(e) => handleChange(e)} 
+                    value={input} 
+                    name='repeat'
+                    autocomplete="off"
+                    placeholder="Pokemon name..."
+                  />
                   <button type='submit'>Send</button>
               </form>
               {
                   game ? 
                   success ?
-                  <div>
-                      Acertaste ahr
+                  <div className={style.result}>
+                      Correct! This pokemon is {myPokemon[0].name}
                   </div> :
-                  <div>
-                      Le erraste cagon
+                  <div className={style.result}>
+                      Oops! Incorrect. This pokemon is {myPokemon[0].name}
                   </div>
                   :
                   <div></div>

@@ -47,7 +47,7 @@ export function getPokemonName(name){
     return async function (dispatch){
         try{
             const json = await axios.get("http://localhost:3001/pokemons?name=" + name)
-            console.log(json.data)
+            // console.log(json.data)
 
             return dispatch({
                 type:"GET_POKEMON_NAME",
@@ -55,6 +55,10 @@ export function getPokemonName(name){
             })
         } catch(error){
             console.log(error)
+            return dispatch({
+                type:"GET_POKEMON_NAME",
+                payload: ['Pokemon not found']
+            })
         }
     }
 }
