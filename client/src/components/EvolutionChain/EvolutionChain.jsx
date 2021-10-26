@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import style from './EvolutionChain.module.css';
 
 import dawn from '../../images/stones/dawn-stone.png'
@@ -44,7 +44,7 @@ export default function EvolutionChain({ pokone, poktwo }){
     return(
         <div className={style.evolutions}>
             <div className={style.pokone} style={{display:'flex', flexDirection:'column'}} >
-                <img src={pokone.img} height='140px' />
+                <img src={pokone.img} alt='Pokemon One' height='140px' />
                 <span style={{fontSize:'18px'}}>{pokone.name.charAt(0).toUpperCase() + pokone.name.slice(1)}</span>
             </div>
 
@@ -53,7 +53,7 @@ export default function EvolutionChain({ pokone, poktwo }){
                     poktwo.itemimg ?
                     <div style={{display:'flex', flexDirection:"column", alignItems:"center", fontWeight:'500'}}>
                         <span>{poktwo["held_item"].replace('-', ' ')}</span>
-                        <img src={poktwo.itemimg} height='32px' width='32px' /> 
+                        <img src={poktwo.itemimg} alt='Held Item' height='32px' width='32px' /> 
                     </div> :
                     poktwo.item ? 
                     <div>
@@ -61,7 +61,7 @@ export default function EvolutionChain({ pokone, poktwo }){
                         stones.hasOwnProperty(poktwo.item) ?
                         <div style={{display:'flex', flexDirection:"column", alignItems:"center", fontWeight:'500'}}>
                             <span>{poktwo.item.replace('-', ' ')}</span>
-                            <img src={stones[poktwo.item]} height='24px' width='24px' /> 
+                            <img src={stones[poktwo.item]} alt='Item' height='24px' width='24px' /> 
                         </div>
                         : <span>{poktwo.item.replace('-', ' ')}</span>
                         }
@@ -81,7 +81,7 @@ export default function EvolutionChain({ pokone, poktwo }){
             </div>
 
             <div className={style.poktwo} style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                <img src={poktwo.img} height='140px' />
+                <img src={poktwo.img} alt='Pokemon Two' height='140px' />
                 <span style={{fontSize:'18px'}}>{poktwo.name.charAt(0).toUpperCase() + poktwo.name.slice(1)}</span>
             </div>
             

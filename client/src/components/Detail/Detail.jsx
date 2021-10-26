@@ -118,7 +118,7 @@ export default function Detail (props){
                                                 {
                                                     myPokemon[0].abilities.length ? myPokemon[0].abilities.map( el => {
                                                         return(
-                                                            <span style={{width:'15vw', display: 'flex', justifyContent:'flex-start'}}>{el.replace('-', ' ')}</span>
+                                                            <span key={el} style={{width:'15vw', display: 'flex', justifyContent:'flex-start'}}>{el.replace('-', ' ')}</span>
                                                         )
                                                     }) :
                                                     <span>This pokemon has no abilities</span>
@@ -131,7 +131,7 @@ export default function Detail (props){
                                                 {
                                                     myPokemon[0].moves.length ? myPokemon[0].moves.map( el => {
                                                         return(
-                                                            <span style={{display:'inline-block'}}><img src={capture} alt='Capture' height='13px' width='13px'/> {el.replace('-', ' ')}</span>
+                                                            <span key={el} style={{display:'inline-block'}}><img src={capture} alt='Capture' height='13px' width='13px'/> {el.replace('-', ' ')}</span>
                                                         )
                                                     }) :
                                                     <span style={{width:'17vw'}}>This pokemon has no moves</span>
@@ -177,7 +177,7 @@ export default function Detail (props){
                                                 {
                                                     myPokemon[0].locations.length ? myPokemon[0].locations.map( el => {
                                                         return(
-                                                            <span style={{display:'inline-block'}}><img src={capture} alt='Capture' height='13px' width='13px'/> {el}</span>
+                                                            <span key={el} style={{display:'inline-block'}}><img src={capture} alt='Capture' height='13px' width='13px'/> {el}</span>
                                                         )
                                                     }) :
                                                     <span style={{width:'25vw'}}>This pokemon has no encounter locations</span>

@@ -1,9 +1,8 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 import style from "./Checkbox.module.css";
 
 export default function Checkbox({types , handleChecked}) {
-  const [state, setState] = useState(false);
 
   const checkboxe = useRef();
 
@@ -28,7 +27,7 @@ export default function Checkbox({types , handleChecked}) {
             <div ref={checkboxe} className={style.checkboxes}>
                 {
                     types.map( type => (
-                        <label for={type.name}>
+                        <label for={type.name} key={type.name}>
                             <input 
                                 type="checkbox" 
                                 id={type.name} 

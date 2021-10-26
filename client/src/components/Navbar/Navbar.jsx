@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react' ;
+import React from 'react' ;
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import style from './Navbar.module.css'

@@ -7,7 +7,8 @@ import Paginado from '../Paginado/Paginado';
 import Navbar from '../Navbar/Navbar';
 import random from '../../images/random.png';
 import style from './Home.module.css';
-import poke from '../../images/pokebola.png'
+import poke from '../../images/pokebola.png';
+import game from '../../images/game.png'
 
 
 export default function Home(){
@@ -62,6 +63,8 @@ export default function Home(){
             <Navbar />
             
             <button onClick={e => {handleClick(e)}} className={style.poke}><img src={poke} alt="pokebola" width='20px'/> Reload all</button>
+
+            <Link to='/game' style={{textDecoration: 'none'}} className={style.game}><button className={style.poke}><img src={game} alt="Who's that Pokemon" width='100px'/></button></Link>
 
             <div className={style.sortfilter}>
                 <select onChange={e => handleSort(e)}>

@@ -20,8 +20,6 @@
     border-radius: 4px;
     color: rgb(255, 255, 255);
     display: block;
-    font-family: inherit;
-    font-size: 16px;
     padding: 10px;
     width: 10%;
     cursor: pointer;
@@ -31,6 +29,25 @@
     font-size: 16px;
     font-weight: 500;
 }
+.game{
+    position: absolute;
+    top: 12%;
+    right: 2%;
+    width: 10%;
+}
+
+.game button{
+    width: 100%;
+    padding: 4px;
+    padding-top: 4%;
+    display: flex;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+.game button:hover{
+    transform: translateY(-4px);
+}
+
 
 .sortfilter{
     display: flex;

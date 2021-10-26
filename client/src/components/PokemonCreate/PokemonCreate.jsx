@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postPokemon, getTypes } from '../../actions/index';
 import style from './PokemonCreate.module.css'
-import Checkbox from '../Checkbox/Checkbox';
 import validate from './validate.js';
 import Oak from '../../images/profesor.png'
 
