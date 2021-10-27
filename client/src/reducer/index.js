@@ -116,15 +116,25 @@ function rootReducer (state = initialState, action){
                     }) 
             }
             if(action.payload === 'normal'){
-                sortedArray = state.pokemons.sort(function (a, b){
-                        if(a.id > b.id){
-                            return 1;
-                        }
-                        if(b.id > a.id){
-                            return -1;
-                        }
-                        return 0;
-                    }) 
+                const apiPokes = state.pokemons.filter( el => !el.createdInDb).sort(function (a, b){
+                    if(a.id > b.id){
+                        return 1;
+                    }
+                    if(b.id > a.id){
+                        return -1;
+                    }
+                    return 0;
+                }) 
+                const dbPokes = state.pokemons.filter( el => el.createdInDb).sort(function (a, b){
+                    if(a.id > b.id){
+                        return 1;
+                    }
+                    if(b.id > a.id){
+                        return -1;
+                    }
+                    return 0;
+                }) 
+                sortedArray = [...apiPokes, ...dbPokes]
             }
 
             return {

@@ -15,6 +15,7 @@ export default function Home(){
 
     const dispatch = useDispatch()
     const allPokemons = useSelector(state => state.pokemons)
+    const all = useSelector(state => state.allPokemons)
     const types = useSelector(state => state.types)
 
     const [orden, setOrden] = useState('')
@@ -28,15 +29,16 @@ export default function Home(){
         setCurrentPage(pageNumber)
     }
 
+
     useEffect(() => {
         dispatch(removeDetail());
-        dispatch(getPokemons());
         dispatch(getTypes());
-    }, [dispatch])
+        dispatch(getPokemons());  
+    }, [all.length, dispatch])
 
     useEffect(() => {
         setCurrentPage(1);
-      }, [allPokemons,setCurrentPage]);
+      }, [allPokemons.length,setCurrentPage]);
 
     function handleClick(e){
         e.preventDefault();
