@@ -71,8 +71,8 @@ export default function Home(){
                     <option value="normal">Normal</option>
                     <option value="asc">A - Z</option>
                     <option value="desc">Z - A</option>
-                    <option value="HAttack">+ Attack</option>
-                    <option value="LAttack">- Attack</option>
+                    <option value="HAttack">Highest Attack</option>
+                    <option value="LAttack">Lowest Attack</option>
                 </select>
                 <select onChange={e => handleFilterCreated(e)}>
                     <option value="All">All</option>
@@ -109,7 +109,7 @@ export default function Home(){
                 }) :
                 <div className={style.notfound}>
                     <img src='images/notfound.png'alt="Pokemon not found" width='200px'/>
-                    <span>Pokemon not found</span>
+                    <span>{currentPokemons[0]} not found</span>
                 </div>
                 :
                 <div className={style.loading}> 

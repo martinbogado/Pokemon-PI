@@ -56,7 +56,7 @@ function rootReducer (state = initialState, action){
             
             return {
                 ...state,
-                pokemons: statusFiltered
+                pokemons: statusFiltered.length ? statusFiltered : [`${action.payload} Pokemons`]
             }
 
         case "FILTER_CREATED":
@@ -65,7 +65,7 @@ function rootReducer (state = initialState, action){
 
             return {
                 ...state,
-                pokemons: action.payload === 'All' ? allPokemons2 : statusFiltered2
+                pokemons: action.payload === 'All' ? allPokemons2 : statusFiltered2.length ? statusFiltered2 : ['Pokemons created']
             }
 
         case "ORDER_BY_NAME_OR_STRENGH":

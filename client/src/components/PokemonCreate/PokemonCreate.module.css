@@ -107,8 +107,8 @@
 }
 
 .container button{
-    background-color: rgb(23, 226, 241);
-    border: 2px solid rgb(1, 216, 231);
+    background-color: rgb(23, 117, 241);
+    border: 2px solid rgb(32, 142, 245);
     border-radius: 4px;
     color: #fff;
     display: block;
@@ -136,9 +136,16 @@
     transition: all 0.4s ease; 
 }
 .container .create:hover{
-    background-color: rgb(23, 226, 241);
-    border: 2px solid rgb(2, 245, 233);
+    background-color: rgb(23, 143, 241);
+    border: 2px solid rgb(39, 125, 223);
     color: rgb(255, 255, 255); 
+}
+
+.choosetypes{
+    margin-top: 2%;
+    margin-left: 4%;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .typeserror{

@@ -293,7 +293,7 @@ export default function PokemonCreate(){
                     </section>
                     <section className={section === 2 ? style.show : style.hide}>
                         <div style={{position:'relative'}}> 
-                            <span>El usuario puede elegir hasta 2 tipos</span>
+                            <span className={style.choosetypes} style={{display:'flex', justifyContent:'flex-start', fontFamily:'Open Sans'}}>Choose up to 2 Pokemon types</span>
 
                             <div className={style.containertypes}>
                             {

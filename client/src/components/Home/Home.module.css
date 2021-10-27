@@ -55,6 +55,10 @@
     padding-top: 1%;
 }
 
+.sortfilter select option{
+    padding: 3%;
+}
+
 select {
     cursor: pointer;
     box-shadow: none;
@@ -72,10 +76,7 @@ select {
     color: white;
 }
 
-select option{
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
+
 /* Loading  */
 
 .loading{

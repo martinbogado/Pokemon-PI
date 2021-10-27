@@ -57,7 +57,7 @@ export function getPokemonName(name){
             console.log(error)
             return dispatch({
                 type:"GET_POKEMON_NAME",
-                payload: ['Pokemon not found']
+                payload: ['Pokemon']
             })
         }
     }
