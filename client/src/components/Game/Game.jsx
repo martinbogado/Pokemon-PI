@@ -44,7 +44,7 @@ export default function Game(){
 
     function handleSubmit(e){
         e.preventDefault();
-        if(myPokemon[0]){
+        if(myPokemon[0] && input.length){
             setGame(true)
             setInput('')
     

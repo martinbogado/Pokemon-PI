@@ -10,12 +10,9 @@ export default function LandingPage(){
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(getTypes());
         dispatch(getPokemons());
     }, [dispatch])
-
-    useEffect(() => {
-        dispatch(getTypes());
-    }, [dispatch]);
 
     return(
         <div className={style.position}>

@@ -5,6 +5,7 @@ import { postPokemon, getTypes } from '../../actions/index';
 import style from './PokemonCreate.module.css'
 import validate from './validate.js';
 import Oak from '../../images/profesor.png'
+import swal from 'sweetalert';
 
 
 export default function PokemonCreate(){
@@ -72,9 +73,10 @@ export default function PokemonCreate(){
     function handleSection(e){
         e.preventDefault();
 
-        if(Object.keys(errors).length === 1 && errors.types.length){
-            setSection(section === 1 ? 2 : 1); 
-        }
+        Object.keys(errors).length === 1 && errors.types.length ?
+            setSection(section === 1 ? 2 : 1) 
+            :
+            swal("You must complete the form correctly!", "", "error");
     }
 
     function handleChecked(e){
@@ -106,8 +108,8 @@ export default function PokemonCreate(){
         e.preventDefault();
 
         if(Object.keys(errors).length === 0 && input.name.length){
-            dispatch(postPokemon(input))
-            alert("Pokemon created successfuly!!")
+            dispatch(postPokemon(input));
+            swal("Good job!", "Pokemon created successfuly!", "success");
             setInput({
                 name: '',
                 hp: '',
@@ -119,7 +121,9 @@ export default function PokemonCreate(){
                 types: [],
             })
             history.push("/home")
-        }   
+        } else{
+            swal("You must choose at least one type!", "", "error");
+        }  
     }
 
 
