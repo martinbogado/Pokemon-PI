@@ -18,6 +18,7 @@ export default function Home(){
     const all = useSelector(state => state.allPokemons)
     const types = useSelector(state => state.types)
 
+    const [pokLoaded, setPokLoaded] = useState(all.length ? true : false)
     const [orden, setOrden] = useState('')
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
@@ -33,8 +34,10 @@ export default function Home(){
     useEffect(() => {
         dispatch(removeDetail());
         dispatch(getTypes());
-        dispatch(getPokemons());  
-    }, [all.length, dispatch])
+        if(!pokLoaded){
+            dispatch(getPokemons());
+        }   
+    }, [pokLoaded, dispatch])
 
     useEffect(() => {
         setCurrentPage(1);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { postPokemon, getTypes } from '../../actions/index';
+import { postPokemon, getTypes, getPokemons } from '../../actions/index';
 import style from './PokemonCreate.module.css'
 import validate from './validate.js';
 import Oak from '../../images/profesor.png'
@@ -109,6 +109,7 @@ export default function PokemonCreate(){
 
         if(Object.keys(errors).length === 0 && input.name.length){
             dispatch(postPokemon(input));
+            dispatch(getPokemons());
             swal("Good job!", "Pokemon created successfuly!", "success");
             setInput({
                 name: '',
