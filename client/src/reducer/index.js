@@ -16,9 +16,29 @@ function rootReducer (state = initialState, action){
             }
 
         case "RELOAD_POKEMONS":
+            const apiPokesSort = state.allPokemons.filter( el => !el.createdInDb).sort(function (a, b){
+                if(a.id > b.id){
+                    return 1;
+                }
+                if(b.id > a.id){
+                    return -1;
+                }
+                return 0;
+            }) 
+            const dbPokesSort = state.allPokemons.filter( el => el.createdInDb).sort(function (a, b){
+                if(a.id > b.id){
+                    return 1;
+                }
+                if(b.id > a.id){
+                    return -1;
+                }
+                return 0;
+            }) 
+            let sortedArrayNormal = [...apiPokesSort, ...dbPokesSort]
+
             return {
                 ...state,
-                pokemons: state.allPokemons
+                pokemons: sortedArrayNormal
             }    
         
         case "GET_TYPES":
