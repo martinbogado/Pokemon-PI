@@ -16,14 +16,17 @@
 - Aprender y practicar el workflow de GIT.
 - Usar y practicar testing.
 
-## Resultados
 
-![webpage](https://user-images.githubusercontent.com/85038226/139119482-07547852-6a48-49b7-97de-e76735b1621d.png)
+## Resultados
+### Video presentacion del proyecto
+[![Watch the video](https://user-images.githubusercontent.com/85038226/139535597-f7fbce6d-7e76-41a0-84c6-faaef82c0966.png)](https://vimeo.com/640672698)
+
+<!-- ![webpage](https://user-images.githubusercontent.com/85038226/139119482-07547852-6a48-49b7-97de-e76735b1621d.png)
 
 ![details](https://user-images.githubusercontent.com/85038226/139119646-a4a5b09e-0601-4a93-ac25-27462af188b8.png)
 
 ![create pokemon](https://user-images.githubusercontent.com/85038226/139119921-ce0ad835-7529-47dc-a7dc-251fab2c6a2f.png)
-
+ -->
 
 
 ## Enunciado
